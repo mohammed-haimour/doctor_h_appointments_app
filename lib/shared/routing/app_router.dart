@@ -1,4 +1,5 @@
 import 'package:doctor_h_appointments_app/presentation/on_boarding/on_boarding_screen.dart';
+import 'package:doctor_h_appointments_app/presentation/registration/create_account_screen.dart';
 import 'package:doctor_h_appointments_app/shared/routing/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,10 @@ class AppRouter {
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
           builder: (_) => const OnBoardingScreen(),
+        );
+      case Routes.createAccountScreen:
+        return MaterialPageRoute(
+          builder: (_) => const  CreateAccountScreen(),
         );
       default:
         return MaterialPageRoute(

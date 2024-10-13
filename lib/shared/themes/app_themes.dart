@@ -14,9 +14,9 @@ abstract class AppThemes {
       ),
       fontFamily: "Museo Sans", // Updated to Museo Sans
       bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: Constants.colorWhiteSmoke,
+        backgroundColor: Colors.white, // Changed to white
       ),
-      scaffoldBackgroundColor: Constants.colorWhiteSmoke,
+      scaffoldBackgroundColor: Colors.white, // Changed to white
       primaryColorLight: Constants.colorDarkBlueDoctorH,
       highlightColor: Constants.colorLightBlueDoctorH,
       brightness: Brightness.light,
@@ -25,7 +25,7 @@ abstract class AppThemes {
         onPrimary: Constants.colorLightBlueDoctorH,
       ),
       datePickerTheme: DatePickerThemeData(
-        backgroundColor: Constants.colorWhiteSmoke,
+        backgroundColor: Colors.white, // Optionally change this as well
         rangeSelectionBackgroundColor: Colors.red,
         dividerColor: Colors.blue,
         headerBackgroundColor: Constants.colorLightBlueDoctorH,
@@ -45,7 +45,6 @@ abstract class AppThemes {
         rangePickerBackgroundColor: Colors.red,
       ),
       textTheme: TextTheme(
-
         // body fonts
         bodySmall: TextStyle(
           color: Constants.colorBlack,
@@ -79,7 +78,6 @@ abstract class AppThemes {
           fontSize: ResponsiveFontSize.responsiveFontSize(context, fontSize: 50),
           fontFamily: "Museo Sans", // Use Museo Sans
         ),
-
       ),
       elevatedButtonTheme: const ElevatedButtonThemeData(
         style: ButtonStyle(
@@ -107,9 +105,9 @@ abstract class AppThemes {
       iconTheme: const IconThemeData(color: Constants.colorDarkBlueDoctorH),
       fontFamily: "Museo Sans", // Updated to Museo Sans
       bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: Constants.colorLightBlack,
+        backgroundColor: Colors.white, // Changed to white
       ),
-      scaffoldBackgroundColor: Constants.colorLightBlack,
+      scaffoldBackgroundColor: Colors.white, // Changed to white
       colorScheme: const ColorScheme.dark(
         primary: Constants.colorDarkBlueDoctorH,
         onPrimary: Constants.colorLightBlueDoctorH,

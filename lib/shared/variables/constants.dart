@@ -8,11 +8,15 @@ class Constants{
   static const Color colorTransparentBlack = Color.fromRGBO(10, 10, 10, 0.5);
   static const Color colorWhite = Colors.white;
   static const Color colorWhiteSmoke = Color.fromRGBO(229, 229, 229, 1);
+  static const Color colorWhiteLessSmoke = Color.fromRGBO(239, 239, 239, 1.0);
+
   static const Color colorTransparentWhite = Color.fromRGBO(229, 229, 229, 0.5);
   static const Color colorRed = Color.fromRGBO(185, 0, 0, 1.0);
   static const Color colorGrey = Colors.grey;
   static const Color colorDarkGrey = Color.fromRGBO(
       112, 112, 112, 1.0);
+  static const Color colorLightGrey = Color.fromRGBO(
+      185, 185, 185, 1.0);
   static const Color colorTransparentBlue = Color.fromRGBO(8, 21, 189, 0.26);
   static const Color colorGreen = Color.fromRGBO(
       46, 155, 49, 1.0);

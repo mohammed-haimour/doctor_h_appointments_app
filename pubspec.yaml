@@ -17,6 +17,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  flutter_native_splash: ^2.2.14 # Add the flutter_native_splash dependency
 
 flutter:
   uses-material-design: true
@@ -56,3 +57,8 @@ flutter:
     - assets/images/splash/
     - assets/images/onboarding/
     - assets/
+    - lib/shared/widgets/
+
+flutter_native_splash:
+  color: "#000000" # Background color of the splash screen
+  image: /Users/mohammedmahmoud/StudioProjects/doctor_h_appointments_app/assets/images/splash/splash.png # Path to your splash image
