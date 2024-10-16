@@ -1,8 +1,9 @@
 import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:flutter/material.dart';
 
-class AppTextFormField extends StatelessWidget {
+class CustomTextFormField extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
+  final IconData prefixIcon;
   final InputBorder? focusedBorder;
   final InputBorder? enabledBorder;
   final TextStyle? inputTextStyle;
@@ -12,10 +13,11 @@ class AppTextFormField extends StatelessWidget {
   final Color? backgroundColor;
   final TextEditingController? controller;
   final Function(String?) validator;
-  const AppTextFormField({
+  const CustomTextFormField({
     super.key,
     this.contentPadding,
     this.focusedBorder,
+    required this.prefixIcon,
     this.enabledBorder,
     this.inputTextStyle,
     this.hintStyle,
@@ -29,15 +31,18 @@ class AppTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+
       controller: controller,
       decoration: InputDecoration(
+        hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Constants.colorGrey ,fontWeight: FontWeight.w300),
+        prefixIcon: Icon(prefixIcon , color: Constants.colorGrey,),
         isDense: true,
         contentPadding: contentPadding ??
-            Constants.paddingMedium,
+            Constants.paddingSmall,
         focusedBorder: focusedBorder ??
             OutlineInputBorder(
               borderSide: const BorderSide(
-                color: Constants.colorDarkBlueDoctorH,
+                color: Constants.colorLightGrey,
                 width: 1.3,
               ),
               borderRadius: BorderRadius.circular(16.0),
@@ -45,7 +50,7 @@ class AppTextFormField extends StatelessWidget {
         enabledBorder: enabledBorder ??
             OutlineInputBorder(
               borderSide: const BorderSide(
-                color: Constants.colorDarkBlueDoctorH,
+                color: Constants.colorLightGrey,
                 width: 1.3,
               ),
               borderRadius: BorderRadius.circular(16.0),
@@ -67,10 +72,10 @@ class AppTextFormField extends StatelessWidget {
         // hintStyle: hintStyle ?? TextStyles.font14LightGrayRegular,
         hintText: hintText,
         suffixIcon: suffixIcon,
-        fillColor: backgroundColor ?? Constants.colorWhiteSmoke,
+        fillColor: backgroundColor ?? Constants.colorWhiteLessSmoke,
         filled: true,
       ),
-      // style: TextStyles.font14DarkBlueMedium,
+      style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Constants.colorLightBlack),
       validator: (value) {
         return validator(value);
       },

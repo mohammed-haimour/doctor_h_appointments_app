@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
+  final bool isFullWidth;
   final Function() onPressed;
-  const CustomButton({required this.text, required this.onPressed, super.key});
+  const CustomButton({required this.text, required this.onPressed, super.key,  this.isFullWidth = false});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: ScreenMeasurements.width(context) / 1.25 ,
+      width: (isFullWidth) ? double.infinity :ScreenMeasurements.width(context) / 1.25 ,
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30.0), // Increase this value for more rounded corners
