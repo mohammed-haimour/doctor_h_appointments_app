@@ -1,3 +1,4 @@
+import 'package:doctor_h_appointments_app/presentation/registration/enums/registration_type_enum.dart';
 import 'package:doctor_h_appointments_app/presentation/registration/widgets/create_account_form.dart';
 import 'package:doctor_h_appointments_app/presentation/registration/widgets/registration_footer.dart';
 import 'package:doctor_h_appointments_app/presentation/registration/widgets/registration_header.dart';
@@ -18,7 +19,7 @@ class CreateAccountScreen extends StatelessWidget {
           children: [
             RegistrationHeader(),
             CreateAccountForm(),
-            RegistrationFooter(),
+            RegistrationFooter(registrationType: RegistrationTypeEnum.createAccount,),
           ],
         ),
       ),
