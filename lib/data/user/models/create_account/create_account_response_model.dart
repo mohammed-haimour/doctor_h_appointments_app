@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'create_account_response_model.g.dart'; // Make sure to generate this file
+part 'create_account_response_model.g.dart';
 
 @JsonSerializable()
 class CreateAccountResponseModel {
