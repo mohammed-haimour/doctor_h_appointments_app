@@ -6,13 +6,13 @@ part 'login_reponse_model.g.dart';
 class LoginResponseModel {
   final String message;
   @JsonKey(name: "data")
-  final LoginData userTokenData;
+  final LoginData userDataAndToken;
   final bool status;
   final int code;
 
   LoginResponseModel({
     required this.message,
-    required this.userTokenData,
+    required this.userDataAndToken,
     required this.status,
     required this.code,
   });

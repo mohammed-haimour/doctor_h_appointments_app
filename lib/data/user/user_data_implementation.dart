@@ -14,18 +14,23 @@ class UserDataImplementation implements UserDataInterface{
   UserDataImplementation({required UserDataRemoteSource remoteSource , required UserDataLocalSource localSource}): _remoteSource = remoteSource , _localSource = localSource;
 
   @override
-  Future<CreateAccountResponseModel> createAccount({required CreateAccountPayloadModel createAccountPayload}) {
-    // TODO: implement create account
-    throw UnimplementedError();
+  Future<CreateAccountResponseModel> createAccount({required CreateAccountPayloadModel createAccountPayload})
+  async{
+    Map<String , dynamic> payload = createAccountPayload.toJson();
+
+    Map<String, dynamic> response = await _remoteSource.createAccount(payload: payload);
+
+    CreateAccountResponseModel createAccountResponse = CreateAccountResponseModel.fromJson(response);
+
+    return createAccountResponse;
   }
 
   @override
   Future<LoginResponseModel> login({required LoginPayloadModel loginPayload})
   async{
-
     Map<String , dynamic> payload = loginPayload.toJson();
 
-    Map<String, dynamic> response = await _remoteSource.login(payload: payload);
+    Map<String, dynamic> response = await _remoteSource.logIn(payload: payload);
 
     LoginResponseModel loginResponse = LoginResponseModel.fromJson(response);
 

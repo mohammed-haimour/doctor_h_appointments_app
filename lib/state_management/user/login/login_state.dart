@@ -10,7 +10,7 @@ class LoginFailure extends LoginState {
   LoginFailure({required this.message});
 }
 class LoginSuccess extends LoginState {
-  final LoginResponseEntity loginResponseEntity;
+  final LoginResultEntity loginResponseEntity;
 
   LoginSuccess({required this.loginResponseEntity});
 }
