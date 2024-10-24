@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:doctor_h_appointments_app/business/user/entities/create_account/create_account_result_entity.dart';
+import 'package:doctor_h_appointments_app/business/user/entities/login/create_account_result_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/login/login_result_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/user_business_interface.dart';
 import 'package:doctor_h_appointments_app/data/user/models/create_account/create_account_payload_model.dart';

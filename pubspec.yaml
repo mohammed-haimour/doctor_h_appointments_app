@@ -16,8 +16,10 @@ dependencies:
   bloc: ^8.1.4
   flutter_bloc: ^8.1.6
   json_annotation: ^4.9.0
-  retrofit: ^4.4.1
   pretty_dio_logger: ^1.4.0
+  dartz: ^0.10.1
+  get_it: ^8.0.1
+  email_validator: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -26,7 +28,6 @@ dev_dependencies:
   flutter_native_splash: ^2.2.14
   flutter_pretty_dio_logger: ^3.0.0
   json_serializable: ^6.8.0
-  retrofit_generator: ^5.0.0
   build_runner: ^2.4.13
   analyzer: ^5.13.0
 
@@ -68,7 +69,7 @@ flutter:
     - assets/images/splash/
     - assets/images/onboarding/
     - assets/
-    - lib/shared/widgets/
+
 
 flutter_native_splash:
   color: "#000000" # Background color of the splash screen
