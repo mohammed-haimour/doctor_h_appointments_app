@@ -5,5 +5,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   setUpGetIt(); // i always forgot this shit :)
-  runApp( DoctorHApp(appRouter: AppRouter(),));
+  runApp(DoctorHApp(
+    appRouter: AppRouter(),
+  ));
 }

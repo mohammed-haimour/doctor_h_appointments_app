@@ -9,6 +9,7 @@ import 'package:doctor_h_appointments_app/data/user/user_data_interface.dart';
 class UserDataImplementation implements UserDataInterface{
 
   final UserDataRemoteSource _remoteSource;
+  // ignore: unused_field
   final UserDataLocalSource _localSource;
 
   UserDataImplementation({required UserDataRemoteSource remoteSource , required UserDataLocalSource localSource}): _remoteSource = remoteSource , _localSource = localSource;

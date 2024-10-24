@@ -4,6 +4,7 @@ import 'package:doctor_h_appointments_app/presentation/registration/create_accou
 import 'package:doctor_h_appointments_app/presentation/registration/login_screen.dart';
 import 'package:doctor_h_appointments_app/shared/di/dependency_injection.dart';
 import 'package:doctor_h_appointments_app/shared/routing/routes.dart';
+import 'package:doctor_h_appointments_app/state_management/user/create_account/create_account_cubit.dart';
 import 'package:doctor_h_appointments_app/state_management/user/login/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
     //this arguments to be passed in any screen like this ( arguments as ClassName )
+    // ignore: unused_local_variable
     final arguments = settings.arguments;
 
     switch (settings.name) {
@@ -20,7 +22,9 @@ class AppRouter {
         );
       case Routes.createAccountScreen:
         return MaterialPageRoute(
-          builder: (_) => const  CreateAccountScreen(),
+          builder: (_) => BlocProvider(
+              create:(context) => CreateAccountCubit(getIt<UserBusinessInterface>()),
+              child: const CreateAccountScreen()),
         );
       case Routes.logInScreen:
         return MaterialPageRoute(
