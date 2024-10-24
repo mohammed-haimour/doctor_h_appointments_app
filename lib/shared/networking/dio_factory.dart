@@ -41,8 +41,11 @@ class DioFactory {
     dio?.interceptors.add(
       PrettyDioLogger(
         requestBody: true,
-        requestHeader: true,
-        responseHeader: true,
+        responseBody: true,
+        compact: true,
+        requestHeader: false,
+        responseHeader: false,
+        request: false,
       ),
     );
   }

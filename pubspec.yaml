@@ -19,6 +19,7 @@ dependencies:
   pretty_dio_logger: ^1.4.0
   dartz: ^0.10.1
   get_it: ^8.0.1
+  email_validator: ^3.0.0
 
 dev_dependencies:
   flutter_test:

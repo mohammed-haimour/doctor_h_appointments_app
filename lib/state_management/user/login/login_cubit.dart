@@ -2,19 +2,58 @@ import 'package:doctor_h_appointments_app/business/user/entities/login/login_res
 import 'package:doctor_h_appointments_app/business/user/user_business_interface.dart';
 import 'package:doctor_h_appointments_app/data/user/models/login/login_payload_model.dart';
 import 'package:doctor_h_appointments_app/shared/networking/errors/api_error_handler.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'login_state.dart';
 
-class LoginCubit extends Cubit<LoginState> {
+class LogInCubit extends Cubit<LoginState> {
 
   final UserBusinessInterface _userBusiness;
-  LoginCubit(this._userBusiness) : super(LoginInitial());
+  LogInCubit(this._userBusiness) : super(LoginInitial());
 
-  static LoginCubit get(context) => BlocProvider.of<LoginCubit>(context);
+  final formKey = GlobalKey<FormState>();
+  final TextEditingController emailFieldController = TextEditingController();
+  final TextEditingController passwordFieldController = TextEditingController();
 
-  Future<void> login({required LoginPayloadModel payload})
+  dynamic emailValidation(value){
+    if(value == null || value.isEmpty){
+      return "Please enter the email";
+    }else{
+      if(EmailValidator.validate(value)){
+        return null;
+      }else{
+        return "Please enter a valid email";
+      }
+    }
+  }
+
+  dynamic passwordValidation(value){
+    if(value == null || value.isEmpty){
+      return "Please enter the password";
+    }else{
+      return null;
+    }
+  }
+
+  LoginPayloadModel? validatingAndModelingInPayLoadModel(){
+    if(formKey.currentState!.validate()){
+      // modeling
+      return LoginPayloadModel(email: emailFieldController.text, password: passwordFieldController.text);
+    }else{
+      //cancel
+      return null;
+    }
+  }
+
+
+  Future<void> login()
   async{
+    LoginPayloadModel ? payload = validatingAndModelingInPayLoadModel();
+
+    if(payload == null) return;
+
     emit(LoginLoading());
 
     var result = await _userBusiness.logIn(loginPayload: payload);
@@ -28,4 +67,10 @@ class LoginCubit extends Cubit<LoginState> {
     );
   }
 
+  @override
+  Future<void> close() {
+    emailFieldController.dispose();
+    passwordFieldController.dispose();
+    return super.close();
+  }
 }

@@ -1,9 +1,5 @@
 import 'package:doctor_h_appointments_app/generated/assets.dart';
 import 'package:doctor_h_appointments_app/presentation/on_boarding/widgets/pages.dart';
-import 'package:doctor_h_appointments_app/presentation/on_boarding/widgets/pages/1_welcome_to_doctor_h_app.dart';
-import 'package:doctor_h_appointments_app/presentation/on_boarding/widgets/pages/2_meet_doctors_online.dart';
-import 'package:doctor_h_appointments_app/presentation/on_boarding/widgets/pages/3_connect_with_specialists.dart';
-import 'package:doctor_h_appointments_app/presentation/on_boarding/widgets/pages/4_thousands_of_online_specialists.dart';
 import 'package:doctor_h_appointments_app/presentation/on_boarding/widgets/pages_controller.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_space.dart';
 import 'package:flutter/material.dart';

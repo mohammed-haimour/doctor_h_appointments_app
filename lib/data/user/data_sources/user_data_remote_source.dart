@@ -9,12 +9,12 @@ class UserDataRemoteSource{
 
   Future<Map<String , dynamic>> logIn({required Map<String , dynamic> payload})
   async{
-    return await _httpClient.getData(endPoint: ApiConstants.logIn , payload: payload);
+    return await _httpClient.postMethod(endPoint: ApiConstants.logIn , payload: payload);
   }
 
   Future<Map<String , dynamic>> createAccount({required Map<String , dynamic> payload})
   async{
-    return await _httpClient.getData(endPoint: ApiConstants.createAccount , payload: payload);
+    return await _httpClient.postMethod(endPoint: ApiConstants.createAccount , payload: payload);
   }
 
 }
