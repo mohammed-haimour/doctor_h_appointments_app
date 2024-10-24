@@ -3,7 +3,6 @@ import 'package:doctor_h_appointments_app/presentation/registration/widgets/crea
 import 'package:doctor_h_appointments_app/presentation/registration/widgets/registration_footer.dart';
 import 'package:doctor_h_appointments_app/presentation/registration/widgets/registration_header.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_screen_wrapper.dart';
-import 'package:doctor_h_appointments_app/shared/widgets/custom_space.dart';
 import 'package:flutter/material.dart';
 
 class CreateAccountScreen extends StatelessWidget {

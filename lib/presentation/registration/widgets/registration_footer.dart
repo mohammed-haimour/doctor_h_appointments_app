@@ -1,4 +1,3 @@
-import 'package:doctor_h_appointments_app/presentation/on_boarding/widgets/pages_controller.dart';
 import 'package:doctor_h_appointments_app/presentation/registration/enums/registration_type_enum.dart';
 import 'package:doctor_h_appointments_app/shared/extensions/navigation.dart';
 import 'package:doctor_h_appointments_app/shared/routing/routes.dart';
