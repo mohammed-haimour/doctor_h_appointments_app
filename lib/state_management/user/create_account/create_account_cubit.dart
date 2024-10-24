@@ -89,7 +89,7 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
 
     result.fold(
           ifError,
-          ifSuccess as void Function(CreateAccountResultEntity r),
+          ifSuccess,
     );
   }
 
