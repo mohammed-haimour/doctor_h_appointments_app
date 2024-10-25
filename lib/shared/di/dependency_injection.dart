@@ -1,6 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:doctor_h_appointments_app/business/doctors/doctors_business_implementation.dart';
+import 'package:doctor_h_appointments_app/business/doctors/doctors_business_interface.dart';
 import 'package:doctor_h_appointments_app/business/user/user_business_implementation.dart';
 import 'package:doctor_h_appointments_app/business/user/user_business_interface.dart';
+import 'package:doctor_h_appointments_app/data/doctors/data_sources/doctors_data_local_source.dart';
+import 'package:doctor_h_appointments_app/data/doctors/data_sources/doctors_data_remote_source.dart';
+import 'package:doctor_h_appointments_app/data/doctors/doctors_data_implementation.dart';
+import 'package:doctor_h_appointments_app/data/doctors/doctors_data_interface.dart';
 import 'package:doctor_h_appointments_app/data/user/data_sources/user_data_local_source.dart';
 import 'package:doctor_h_appointments_app/data/user/data_sources/user_data_remote_source.dart';
 import 'package:doctor_h_appointments_app/data/user/user_data_implementation.dart';
@@ -21,4 +27,7 @@ async{
   ));
   getIt.registerLazySingleton<UserBusinessInterface>(() => UserBusinessImplementation(userDataInterface: getIt()));
 
+  // doctors 
+  getIt.registerLazySingleton<DoctorsDataInterface>(() => DoctorsDataImplementation(remoteSource: DoctorsDataRemoteSource(httpClient: dio), localSource: DoctorsDataLocalSource()));
+  getIt.registerLazySingleton<DoctorsBusinessInterface>(() => DoctorsBusinessImplementation(doctorsData: getIt()));
 }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:doctor_h_appointments_app/generated/assets.dart';
 import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_button.dart';
@@ -59,7 +61,7 @@ class DoctorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: Constants.paddingBiggerThanMedium,
-      height: 180,
+      height: 200,
       decoration: BoxDecoration(
         borderRadius: Constants.radiusLarge,
         color: Constants.colorWhiteBlueVeryLight,
@@ -114,34 +116,48 @@ class DoctorCard extends StatelessWidget {
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  const Text("4.5"),
-                  CustomSpace.horizontal(space: 2),
                   const Stack(
                     alignment: Alignment.center,
                     children: [
                       Icon(
                         Icons.star_rounded,
                         color: Color.fromARGB(255, 196, 176, 0), // Border color
-                        size: 28,
+                        size: 24,
                       ),
                       Icon(
                         Icons.star_rounded,
                         color: Constants.colorStartGolden, // Inner fill color
-                        size: 24,
+                        size: 20,
                       ),
                     ],
-                  )
+                  ),
+                  CustomSpace.horizontal(space: 2),
+                  Text(
+                      (3.5 + (Random().nextDouble() * 1.5)).toStringAsFixed(1)),
                 ],
               ),
               Row(
                 children: [
-                  const Icon(Icons.access_time),
+                  const Icon(
+                    Icons.access_time,
+                    size: 20,
+                  ),
                   CustomSpace.horizontal(space: 4),
                   const Text("10:30am - 5:30pm"),
+                ],
+              ),
+              const Row(
+                children: [
+                  Icon(
+                    Icons.attach_money,
+                    color: Constants.colorDarkGreen,
+                    size: 20,
+                  ),
+                  Text("50"),
                 ],
               )
             ],

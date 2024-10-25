@@ -3,7 +3,7 @@ import 'package:doctor_h_appointments_app/shared/networking/api_contants.dart';
 
 extension HttpMethods on Dio{
 
-  Future<Map<String , dynamic>> getMethod({required String endPoint , required Map<String,dynamic> payload})
+  Future<Map<String , dynamic>> getMethod({required String endPoint , Map<String,dynamic>? payload})
   async{
 
     var response = await get(
