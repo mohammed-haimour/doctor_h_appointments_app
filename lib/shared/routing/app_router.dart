@@ -1,4 +1,5 @@
 import 'package:doctor_h_appointments_app/business/user/user_business_interface.dart';
+import 'package:doctor_h_appointments_app/presentation/home/home_screen.dart';
 import 'package:doctor_h_appointments_app/presentation/on_boarding/on_boarding_screen.dart';
 import 'package:doctor_h_appointments_app/presentation/registration/create_account_screen.dart';
 import 'package:doctor_h_appointments_app/presentation/registration/login_screen.dart';
@@ -23,18 +24,19 @@ class AppRouter {
       case Routes.createAccountScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-              create:(context) => CreateAccountCubit(getIt<UserBusinessInterface>()),
+              create: (context) =>
+                  CreateAccountCubit(getIt<UserBusinessInterface>()),
               child: const CreateAccountScreen()),
         );
       case Routes.logInScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-              create:(context) => LogInCubit(getIt<UserBusinessInterface>()),
+              create: (context) => LogInCubit(getIt<UserBusinessInterface>()),
               child: const LogInScreen()),
         );
       case Routes.homeScreen:
         return MaterialPageRoute(
-          builder: (_) => const Center(child:Text("Home"),),
+          builder: (_) => const HomeScreen(),
         );
       default:
         return MaterialPageRoute(
