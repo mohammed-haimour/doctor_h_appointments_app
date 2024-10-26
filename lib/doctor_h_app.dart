@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class DoctorHApp extends StatelessWidget {
   final AppRouter appRouter;
-  const DoctorHApp({super.key , required this.appRouter});
+  const DoctorHApp({super.key, required this.appRouter});
 
   @override
   Widget build(BuildContext context) {

@@ -123,12 +123,12 @@ abstract class AppThemes {
       bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: Colors.white, // Changed to white
       ),
-      scaffoldBackgroundColor: Colors.white, // Changed to white
+      scaffoldBackgroundColor: Constants.colorBlack, // Changed to white
       colorScheme: const ColorScheme.dark(
         primary: Constants.colorDarkBlueDoctorH,
         onPrimary: Constants.colorLightBlueDoctorH,
       ),
-      primaryColorLight: Constants.colorDarkBlueDoctorH,
+      primaryColorLight: Constants.colorLightBlueDoctorH,
       highlightColor: Constants.colorLightBlueDoctorH,
       datePickerTheme: DatePickerThemeData(
         backgroundColor: Constants.colorBlack,
