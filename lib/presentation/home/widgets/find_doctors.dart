@@ -1,0 +1,51 @@
+import 'package:doctor_h_appointments_app/presentation/home/widgets/find_doctors_bloc_builder.dart';
+import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
+import 'package:doctor_h_appointments_app/shared/widgets/custom_button.dart';
+import 'package:doctor_h_appointments_app/shared/widgets/custom_space.dart';
+import 'package:flutter/material.dart';
+
+class FindDoctors extends StatelessWidget {
+  const FindDoctors({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Find Doctors",
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineSmall!
+                    .copyWith(fontWeight: FontWeight.w600),
+                textAlign: TextAlign.start,
+              ),
+              TextButton(
+                  onPressed: () {},
+                  child: Text("Show More",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(fontWeight: FontWeight.w700)))
+            ],
+          ),
+          CustomSpace.vertical(space: 10),
+          const FindDoctorsBlocBuilder(),
+          CustomSpace.vertical(space: 10),
+          CustomButton(
+            text: "Explore More !",
+            onPressed: () {},
+            isFullWidth: true,
+            backGroundColor: Constants.colorLightBlueDoctorH,
+          )
+        ],
+      ),
+    );
+  }
+}

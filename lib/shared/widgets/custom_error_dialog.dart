@@ -1,4 +1,4 @@
-import 'package:doctor_h_appointments_app/shared/extensions/navigation.dart';
+import 'package:doctor_h_appointments_app/shared/extensions/navigation_extenstions.dart';
 import 'package:flutter/material.dart';
 
 void customErrorDialog(BuildContext context ,{required String errorMessage}){

@@ -1,5 +1,5 @@
 import 'package:doctor_h_appointments_app/presentation/registration/enums/registration_type_enum.dart';
-import 'package:doctor_h_appointments_app/shared/extensions/navigation.dart';
+import 'package:doctor_h_appointments_app/shared/extensions/navigation_extenstions.dart';
 import 'package:doctor_h_appointments_app/shared/routing/routes.dart';
 import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_divider_with_text_in_center.dart';

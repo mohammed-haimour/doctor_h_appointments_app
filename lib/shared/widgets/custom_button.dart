@@ -6,23 +6,35 @@ class CustomButton extends StatelessWidget {
   final String text;
   final bool isFullWidth;
   final Function() onPressed;
-  const CustomButton({required this.text, required this.onPressed, super.key,  this.isFullWidth = false});
+  final Color? backGroundColor;
+  final Color? textColor;
+  const CustomButton(
+      {required this.text,
+      required this.onPressed,
+      super.key,
+      this.isFullWidth = false,
+      this.backGroundColor,
+      this.textColor,
+      });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: (isFullWidth) ? double.infinity :ScreenMeasurements.width(context) / 1.25 ,
+      width: (isFullWidth)
+          ? double.infinity
+          : ScreenMeasurements.width(context) / 1.25,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30.0), // Increase this value for more rounded corners
-          color: Constants.colorDarkBlueDoctorH,
+          borderRadius: BorderRadius.circular(
+              30.0), // Increase this value for more rounded corners
+          color: (backGroundColor != null)
+              ? backGroundColor
+              : Constants.colorDarkBlueDoctorH,
         ),
         child: ElevatedButton(
           style: ButtonStyle(
             elevation: WidgetStateProperty.all(0),
             alignment: Alignment.center,
-            padding: WidgetStateProperty.all(
-                const EdgeInsets.symmetric(horizontal: 75, vertical: 15)),
             backgroundColor: WidgetStateProperty.all(Colors.transparent),
             shape: WidgetStateProperty.all(
               RoundedRectangleBorder(
@@ -33,7 +45,10 @@ class CustomButton extends StatelessWidget {
           onPressed: onPressed,
           child: Text(
             text,
-            style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Constants.colorWhiteSmoke , fontWeight: FontWeight.w600),
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                color:
+                    (textColor != null) ? textColor : Constants.colorWhiteSmoke,
+                fontWeight: FontWeight.w600),
           ),
         ),
       ),

@@ -1,4 +1,4 @@
-import 'package:doctor_h_appointments_app/shared/extensions/navigation.dart';
+import 'package:doctor_h_appointments_app/shared/extensions/navigation_extenstions.dart';
 import 'package:doctor_h_appointments_app/shared/routing/routes.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_error_dialog.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_loading_dialog.dart';

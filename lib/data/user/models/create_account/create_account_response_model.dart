@@ -5,6 +5,7 @@ part 'create_account_response_model.g.dart';
 @JsonSerializable()
 class CreateAccountResponseModel {
   final String message;
+  @JsonKey(name :"data")
   final CreateAccountResponseDataModel userDataAndToken; // Nested class for "data"
   final bool status;
   final int code;

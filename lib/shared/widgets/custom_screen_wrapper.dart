@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 
 class CustomScreenWrapper extends StatelessWidget {
   final Widget child;
-  const CustomScreenWrapper({super.key , required this.child});
+  const CustomScreenWrapper({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Padding(
+      child: Container(
           padding: Constants.paddingForScreen,
-          child: child
-        ),
-      );
+          width: double.infinity,
+          child: child),
+    );
   }
 }

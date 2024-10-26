@@ -1,5 +1,5 @@
 import 'package:doctor_h_appointments_app/presentation/on_boarding/on_boarding_screen.dart';
-import 'package:doctor_h_appointments_app/shared/extensions/navigation.dart';
+import 'package:doctor_h_appointments_app/shared/extensions/navigation_extenstions.dart';
 import 'package:doctor_h_appointments_app/shared/routing/routes.dart';
 import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_button.dart';

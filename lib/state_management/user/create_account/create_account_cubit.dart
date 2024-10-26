@@ -84,11 +84,11 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
 
     var result = await _userBusiness.createAccount(createAccountPayload: payload);
 
-    void ifError(Failure failure)=>emit(CreateAccountFailure(message: failure.message));
+    void ifFailure(Failure failure)=>emit(CreateAccountFailure(message: failure.message));
     void ifSuccess(CreateAccountResultEntity entity)=>emit(CreateAccountSuccess(createAccountResultEntity: entity));
 
     result.fold(
-          ifError,
+          ifFailure,
           ifSuccess,
     );
   }
