@@ -65,28 +65,19 @@ class UserBusinessImplementation implements UserBusinessInterface {
       if (userInformation == null) return right(null);
 
       return right(userInformation);
-    } on Exception catch (error) {
-      if (error is DioException) {
-        return left(ServerFailure.fromDioError(error));
-      }
-      return left(ServerFailure(error.toString()));
+    }on Exception catch (error) {
+      return left(LocalDbFailure(error.toString()));
     }
   }
 
   @override
   Future<Either<Failure, void>> saveUserInformation(
-      {required UserInformationModel userToSave}) 
-      async{
-            try {
-
-          await _userData.saveUserInformation(userInformation: userToSave);
-
-      return right(null);// what should i do here
+      {required UserInformationModel userToSave}) async {
+    try {
+      await _userData.saveUserInformation(userInformation: userToSave);
+      return right(null); // what should i do here OH nothing LOL
     } on Exception catch (error) {
-      if (error is DioException) {
-        return left(ServerFailure.fromDioError(error));
-      }
-      return left(ServerFailure(error.toString()));
+      return left(LocalDbFailure(error.toString()));
     }
   }
 }
