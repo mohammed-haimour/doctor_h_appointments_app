@@ -33,8 +33,11 @@ class Doctor {
   final String degree;
   final Specialization specialization;
   final City city;
+  @JsonKey(name: 'appoint_price')
   final int appointPrice;
+  @JsonKey(name: 'start_time')
   final String startTime;
+  @JsonKey(name: 'end_time')
   final String endTime;
 
   Doctor({

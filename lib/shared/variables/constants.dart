@@ -31,10 +31,9 @@ class Constants {
   static const Color colorTransparentPurple =
       Color.fromRGBO(153, 42, 243, 0.25882352941176473);
   static const Color colorDarkRed = Color.fromRGBO(111, 0, 0, 1.0);
-  static const Color colorTransparentRed =
-      Color.fromRGBO(187, 18, 18, 0.25882352941176473);
+  static const Color colorDoctorHRed = Color.fromRGBO(254, 88, 88, 1);
   static const Color colorDarkBlueDoctorH = Color.fromRGBO(28, 42, 58, 1.0);
-  static const Color colorLightBlueDoctorH = Color.fromRGBO(78, 98, 143, 1.0);
+  static const Color colorLightBlueDoctorH = Color.fromRGBO(28, 42, 58, 0.866);
 
   // - App Margins
   static const EdgeInsets marginSmall = EdgeInsets.all(5);

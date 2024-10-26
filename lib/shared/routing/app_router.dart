@@ -1,3 +1,4 @@
+import 'package:doctor_h_appointments_app/business/doctors/doctors_business_interface.dart';
 import 'package:doctor_h_appointments_app/business/user/user_business_interface.dart';
 import 'package:doctor_h_appointments_app/presentation/home/home_screen.dart';
 import 'package:doctor_h_appointments_app/presentation/on_boarding/on_boarding_screen.dart';
@@ -5,6 +6,7 @@ import 'package:doctor_h_appointments_app/presentation/registration/create_accou
 import 'package:doctor_h_appointments_app/presentation/registration/login_screen.dart';
 import 'package:doctor_h_appointments_app/shared/di/dependency_injection.dart';
 import 'package:doctor_h_appointments_app/shared/routing/routes.dart';
+import 'package:doctor_h_appointments_app/state_management/doctors/get_all_doctors/get_all_doctors_cubit.dart';
 import 'package:doctor_h_appointments_app/state_management/user/create_account/create_account_cubit.dart';
 import 'package:doctor_h_appointments_app/state_management/user/login/login_cubit.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +38,12 @@ class AppRouter {
         );
       case Routes.homeScreen:
         return MaterialPageRoute(
-          builder: (_) => const HomeScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                GetAllDoctorsCubit(getIt<DoctorsBusinessInterface>())
+                  ..getAllDoctors(),
+            child: const HomeScreen(),
+          ),
         );
       default:
         return null;

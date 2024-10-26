@@ -7,9 +7,9 @@ class GetAllDoctorsInitial extends GetAllDoctorsState {}
 class GetAllDoctorsLoading extends GetAllDoctorsState {}
 
 class GetAllDoctorsSuccess extends GetAllDoctorsState {
-  final GetAllDoctorsResultEntity getAllDoctorsResultEntity;
+  final GetAllDoctorsResponseModel getAllDoctorsReponseModel;
 
-  GetAllDoctorsSuccess({required this.getAllDoctorsResultEntity});
+  GetAllDoctorsSuccess({required this.getAllDoctorsReponseModel});
 }
 
 class GetAllDoctorsFailure extends GetAllDoctorsState {
