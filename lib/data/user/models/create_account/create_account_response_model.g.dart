@@ -11,7 +11,7 @@ CreateAccountResponseModel _$CreateAccountResponseModelFromJson(
     CreateAccountResponseModel(
       message: json['message'] as String,
       userDataAndToken: CreateAccountResponseDataModel.fromJson(
-          json['userDataAndToken'] as Map<String, dynamic>),
+          json['data'] as Map<String, dynamic>),
       status: json['status'] as bool,
       code: (json['code'] as num).toInt(),
     );
@@ -20,7 +20,7 @@ Map<String, dynamic> _$CreateAccountResponseModelToJson(
         CreateAccountResponseModel instance) =>
     <String, dynamic>{
       'message': instance.message,
-      'userDataAndToken': instance.userDataAndToken,
+      'data': instance.userDataAndToken,
       'status': instance.status,
       'code': instance.code,
     };
