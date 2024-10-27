@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/create_account/create_account_result_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/login/login_result_entity.dart';
+import 'package:doctor_h_appointments_app/business/user/entities/user_information/user_information_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/user_business_interface.dart';
 import 'package:doctor_h_appointments_app/data/user/models/create_account/create_account_payload_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/create_account/create_account_response_model.dart';
@@ -57,15 +58,17 @@ class UserBusinessImplementation implements UserBusinessInterface {
   }
 
   @override
-  Future<Either<Failure, UserInformationModel?>> getUserInformation() async {
+  Future<Either<Failure, UserInformationEntity?>> getUserInformation() async {
     try {
-      UserInformationModel? userInformation =
-          await _userData.getUserInformation();
+      UserInformationModel? model = await _userData.getUserInformation();
 
-      if (userInformation == null) return right(null);
+      if (model == null) return right(null);
 
-      return right(userInformation);
-    }on Exception catch (error) {
+      UserInformationEntity entity =
+          UserInformationEntity.fromUserInformationModel(model: model);
+
+      return right(entity);
+    } on Exception catch (error) {
       return left(LocalDbFailure(error.toString()));
     }
   }
@@ -78,6 +81,26 @@ class UserBusinessImplementation implements UserBusinessInterface {
       return right(null); // what should i do here OH nothing LOL
     } on Exception catch (error) {
       return left(LocalDbFailure(error.toString()));
+    }
+  }
+
+  @override
+  Future<bool> isUserInformationStoredInTheLocalDb() async {
+    try {
+      UserInformationModel? userInformation =
+          await _userData.getUserInformation();
+
+      if (userInformation == null) {
+        print("there are null");
+        return false;
+      } else {
+        print("there are not null");
+
+        return true;
+      }
+    } on Exception {
+        print("there are null but error");
+      return false;
     }
   }
 }

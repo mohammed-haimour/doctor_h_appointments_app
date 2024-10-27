@@ -7,15 +7,12 @@ class UserDataLocalSource {
   UserDataLocalSource({required FlutterSecureStorage storage})
       : _storage = storage;
 
-  Future<void> saveUserInformation(
-      {required String userInformation}) async {
+  Future<void> saveUserInformation({required String userInformation}) async {
     await _storage.write(
-        key: LocalConstants.userInformationStorageKey,
-        value: userInformation);
+        key: LocalConstants.userInformationStorageKey, value: userInformation);
   }
 
-Future<String?> getUserInformation() async {
-  return await _storage.read(key: LocalConstants.userInformationStorageKey);
-}
-
+  Future<String?> getUserInformation() async {
+    return await _storage.read(key: LocalConstants.userInformationStorageKey);
+  }
 }

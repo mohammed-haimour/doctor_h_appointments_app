@@ -18,19 +18,24 @@ import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
 
-Future<void> setUpGetIt()
-async{
+Future<void> setUpGetIt() async {
   Dio dio = DioFactory.getDio();
   FlutterSecureStorage localStorage = SecureStorageFactory.getStorage();
 
   /// user
   getIt.registerLazySingleton<UserDataInterface>(() => UserDataImplementation(
-    remoteSource: UserDataRemoteSource(httpClient: dio),
-    localSource: UserDataLocalSource(storage: localStorage),
-  ));
-  getIt.registerLazySingleton<UserBusinessInterface>(() => UserBusinessImplementation(userDataInterface: getIt()));
+        remoteSource: UserDataRemoteSource(httpClient: dio),
+        localSource: UserDataLocalSource(storage: localStorage),
+      ));
+  getIt.registerLazySingleton<UserBusinessInterface>(
+      () => UserBusinessImplementation(userDataInterface: getIt()));
 
-  // doctors 
-  getIt.registerLazySingleton<DoctorsDataInterface>(() => DoctorsDataImplementation(remoteSource: DoctorsDataRemoteSource(httpClient: dio), localSource: DoctorsDataLocalSource()));
-  getIt.registerLazySingleton<DoctorsBusinessInterface>(() => DoctorsBusinessImplementation(doctorsData: getIt()));
+  // doctors
+  getIt.registerLazySingleton<DoctorsDataInterface>(() =>
+      DoctorsDataImplementation(
+          remoteSource: DoctorsDataRemoteSource(httpClient: dio),
+          localSource: DoctorsDataLocalSource()));
+  getIt.registerLazySingleton<DoctorsBusinessInterface>(
+      () => DoctorsBusinessImplementation(doctorsData: getIt()));
+
 }

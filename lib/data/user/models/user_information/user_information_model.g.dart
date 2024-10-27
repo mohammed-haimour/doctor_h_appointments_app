@@ -9,10 +9,10 @@ part of 'user_information_model.dart';
 UserInformationModel _$UserInformationModelFromJson(
         Map<String, dynamic> json) =>
     UserInformationModel(
-      email: json['email'] as String,
-      password: json['password'] as String,
-      theme: json['theme'] as String,
-      isQuickAccess: json['isQuickAccess'] as String,
+      email: json['email'] as String?,
+      password: json['password'] as String?,
+      theme: json['theme'] as String?,
+      isQuickAccess: json['isQuickAccess'] as String?,
     );
 
 Map<String, dynamic> _$UserInformationModelToJson(
