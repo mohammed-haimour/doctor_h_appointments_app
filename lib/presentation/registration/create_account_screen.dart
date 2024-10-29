@@ -31,14 +31,14 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            RegistrationHeader(),
-            CreateAccountForm(),
+            const RegistrationHeader(),
+            const CreateAccountForm(),
             CustomButton(
                 text: "delete akk",
                 onPressed: () async {
                   await SecureStorageFactory.getStorage().deleteAll();
                 }),
-            RegistrationFooter(
+            const RegistrationFooter(
               registrationType: RegistrationTypeEnum.createAccount,
             ),
           ],

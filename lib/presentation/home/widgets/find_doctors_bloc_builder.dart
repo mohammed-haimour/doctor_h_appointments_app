@@ -19,6 +19,7 @@ class FindDoctorsBlocBuilder extends StatelessWidget {
           return Container(
             padding: Constants.paddingBiggerThanMedium,
             height: 200,
+            width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: Constants.radiusLarge,
               color: Constants.colorDoctorHRed,

@@ -14,7 +14,6 @@ class CustomAppThemeSwitch extends StatelessWidget {
     return BlocBuilder<GetSaveUserInformationCubit,
         GetSaveUserInformationState>(
       builder: (context, state) {
-        print("😀");
         return Padding(
           padding: Constants.paddingMedium,
           child: Row(

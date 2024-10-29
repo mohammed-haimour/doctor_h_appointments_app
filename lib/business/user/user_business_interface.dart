@@ -9,11 +9,11 @@ import 'package:doctor_h_appointments_app/shared/networking/errors/api_error_han
 abstract class UserBusinessInterface {
   Future<Either<Failure, LoginResultEntity>> logIn(
       {required LoginPayloadModel loginPayload});
+        Future<Either<Failure, LoginResultEntity>> logInWithSavedUserInformation();
   Future<Either<Failure, CreateAccountResultEntity>> createAccount(
       {required CreateAccountPayloadModel createAccountPayload});
   Future<Either<Failure, void>> saveUserInformation(
       {required UserInformationEntity userToSave});
   Future<Either<Failure, void>> getUserInformation();
   UserInformationEntity? get userInformation;
-
 }

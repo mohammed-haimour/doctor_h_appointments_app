@@ -10,6 +10,7 @@ import 'package:doctor_h_appointments_app/data/user/models/login/login_payload_m
 import 'package:doctor_h_appointments_app/data/user/models/login/login_reponse_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/user_information/user_information_model.dart';
 import 'package:doctor_h_appointments_app/data/user/user_data_interface.dart';
+import 'package:doctor_h_appointments_app/shared/di/dependency_injection.dart';
 import 'package:doctor_h_appointments_app/shared/networking/dio_factory.dart';
 import 'package:doctor_h_appointments_app/shared/networking/errors/api_error_handler.dart';
 import 'package:flutter/material.dart';
@@ -36,9 +37,9 @@ class UserBusinessImplementation implements UserBusinessInterface {
       if (responseModel.code == 200) {
         saveUserInformation(
             userToSave: _userInformation!.copyWith(
-                email: loginPayload.email,
-                password: loginPayload.password,
-                token: responseModel.userDataAndToken.token));
+          email: loginPayload.email,
+          password: loginPayload.password,
+        ));
         DioFactory.setTokenIntoHeaderAfterLogin(
             responseModel.userDataAndToken.token);
       }
@@ -66,9 +67,9 @@ class UserBusinessImplementation implements UserBusinessInterface {
       if (responseModel.code == 200) {
         saveUserInformation(
             userToSave: _userInformation!.copyWith(
-                email: createAccountPayload.email,
-                password: createAccountPayload.password,
-                token: responseModel.userDataAndToken.token));
+          email: createAccountPayload.email,
+          password: createAccountPayload.password,
+        ));
         DioFactory.setTokenIntoHeaderAfterLogin(
             responseModel.userDataAndToken.token);
       }
@@ -131,6 +132,32 @@ class UserBusinessImplementation implements UserBusinessInterface {
       }
     } else {
       return right(null);
+    }
+  }
+
+  @override
+  Future<Either<Failure, LoginResultEntity>>
+      logInWithSavedUserInformation() async {
+    try {
+      LoginResponseModel responseModel = await _userDataLayer.login(
+          loginPayload: LoginPayloadModel(
+              email: getIt<UserBusinessInterface>().userInformation!.email!,
+              password:
+                  getIt<UserBusinessInterface>().userInformation!.password!));
+
+      if (responseModel.code == 200) {
+        DioFactory.setTokenIntoHeaderAfterLogin(
+            responseModel.userDataAndToken.token);
+      }
+      LoginResultEntity loginResponseEntity =
+          LoginResultEntity.fromLoginResponseModel(model: responseModel);
+
+      return right(loginResponseEntity);
+    } on Exception catch (error) {
+      if (error is DioException) {
+        return left(ServerFailure.fromDioError(error));
+      }
+      return left(ServerFailure(error.toString()));
     }
   }
 }

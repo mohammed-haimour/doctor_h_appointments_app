@@ -5,13 +5,11 @@ class UserInformationEntity {
   final String? email;
   final String? password;
   final ThemeMode? theme;
-  final String? token;
 
   UserInformationEntity({
     required this.email,
     required this.password,
     required this.theme,
-    required this.token,
   });
 
   factory UserInformationEntity.fromUserInformationModel({
@@ -25,13 +23,12 @@ class UserInformationEntity {
           : (model.theme == "light")
               ? ThemeMode.light
               : ThemeMode.dark,
-      token: model.token,
     );
   }
 
   // Method to check if all properties are not null
   bool isNotNull() {
-    return email != null && password != null && theme != null && token != null;
+    return email != null && password != null && theme != null;
   }
 
   // Copy method to create a copy with new values
@@ -39,13 +36,11 @@ class UserInformationEntity {
     String? email,
     String? password,
     ThemeMode? theme,
-    String? token,
   }) {
     return UserInformationEntity(
       email: email ?? this.email,
       password: password ?? this.password,
       theme: theme ?? this.theme,
-      token: token ?? this.token,
     );
   }
 
@@ -54,10 +49,9 @@ class UserInformationEntity {
     return other is UserInformationEntity &&
         other.email == email &&
         other.password == password &&
-        other.theme == theme &&
-        other.token == token;
+        other.theme == theme;
   }
 
   @override
-  int get hashCode => Object.hash(email, password, theme, token);
+  int get hashCode => Object.hash(email, password, theme);
 }
