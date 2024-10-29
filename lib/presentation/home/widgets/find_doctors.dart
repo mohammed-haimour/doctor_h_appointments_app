@@ -2,6 +2,7 @@ import 'package:doctor_h_appointments_app/presentation/home/widgets/find_doctors
 import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_button.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_space.dart';
+import 'package:doctor_h_appointments_app/shared/widgets/custom_text_buttom_v2.dart';
 import 'package:flutter/material.dart';
 
 class FindDoctors extends StatelessWidget {
@@ -26,13 +27,7 @@ class FindDoctors extends StatelessWidget {
                     .copyWith(fontWeight: FontWeight.w600),
                 textAlign: TextAlign.start,
               ),
-              TextButton(
-                  onPressed: () {},
-                  child: Text("Show More",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium!
-                          .copyWith(fontWeight: FontWeight.w700)))
+              CustomTextButtomV2(onClick: () {}, text: "Show More")
             ],
           ),
           CustomSpace.vertical(space: 10),

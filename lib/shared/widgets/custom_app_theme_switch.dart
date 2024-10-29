@@ -85,7 +85,6 @@ class ThemeCard extends StatelessWidget {
           padding: Constants.paddingMedium,
           height: 120,
           decoration: BoxDecoration(
-              color: Constants.colorWhiteBlueVeryLight,
               borderRadius: Constants.radiusMedium,
               border: Border.all(color: Constants.colorDarkBlueDoctorH)),
           child: Column(

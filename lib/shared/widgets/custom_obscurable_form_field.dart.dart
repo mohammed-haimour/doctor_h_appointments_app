@@ -1,3 +1,5 @@
+import 'package:doctor_h_appointments_app/business/user/user_business_interface.dart';
+import 'package:doctor_h_appointments_app/shared/di/dependency_injection.dart';
 import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +29,8 @@ class CustomObscurableFormField extends StatefulWidget {
   });
 
   @override
-  State<CustomObscurableFormField> createState() => _CustomObscurableFormFieldState();
+  State<CustomObscurableFormField> createState() =>
+      _CustomObscurableFormFieldState();
 }
 
 class _CustomObscurableFormFieldState extends State<CustomObscurableFormField> {
@@ -41,12 +44,26 @@ class _CustomObscurableFormFieldState extends State<CustomObscurableFormField> {
       textAlignVertical: TextAlignVertical.center,
       decoration: InputDecoration(
         //! Use [suffixIcon] instead of [suffix]
-        suffixIcon: GestureDetector(onTap: (){setState(() {isObscure = !isObscure;});} , child: Icon((isObscure) ? Icons.visibility : Icons.visibility_off , color: Constants.colorGrey,)),
-        hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Constants.colorGrey ,fontWeight: FontWeight.w300),
-        prefixIcon: Icon(widget.prefixIcon , color: Constants.colorGrey,),
+        suffixIcon: GestureDetector(
+            onTap: () {
+              setState(() {
+                isObscure = !isObscure;
+              });
+            },
+            child: Icon(
+              (isObscure) ? Icons.visibility : Icons.visibility_off,
+              color: Constants.colorGrey,
+            )),
+        hintStyle: Theme.of(context)
+            .textTheme
+            .bodyMedium!
+            .copyWith(color: Constants.colorGrey, fontWeight: FontWeight.w300),
+        prefixIcon: Icon(
+          widget.prefixIcon,
+          color: Constants.colorGrey,
+        ),
         isDense: true,
-        contentPadding: widget.contentPadding ??
-            Constants.paddingSmall,
+        contentPadding: widget.contentPadding ?? Constants.paddingSmall,
         focusedBorder: widget.focusedBorder ??
             OutlineInputBorder(
               borderSide: const BorderSide(
@@ -79,10 +96,15 @@ class _CustomObscurableFormFieldState extends State<CustomObscurableFormField> {
         ),
         // hintStyle: hintStyle ?? TextStyles.font14LightGrayRegular,
         hintText: widget.hintText,
-        fillColor: widget.backgroundColor ?? Constants.colorWhiteLessSmoke,
+        fillColor: widget.backgroundColor ??
+            ((getIt<UserBusinessInterface>().userInformation?.theme ??
+                        ThemeMode.light) ==
+                    ThemeMode.light
+                ? Constants.colorWhiteLessSmoke
+                : Constants.colorBlack),
         filled: true,
       ),
-      style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Constants.colorLightBlack),
+      style: Theme.of(context).textTheme.bodyMedium!,
       validator: (value) {
         return widget.validator(value);
       },

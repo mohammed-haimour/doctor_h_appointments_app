@@ -1,4 +1,3 @@
-
 import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -18,13 +17,15 @@ Future customBottomSheet(BuildContext context,
       context: context,
       builder: (context) {
         return SafeArea(
-          child: Container(
+          child: SizedBox(
             width: double.infinity,
-            padding: Constants.paddingMedium,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: children,
+            child: Padding(
+              padding: Constants.paddingMedium,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: children,
+              ),
             ),
           ),
         );

@@ -5,18 +5,13 @@ import 'package:flutter/material.dart';
 abstract class AppThemes {
   static ThemeData light(BuildContext context) {
     return ThemeData(
+      bottomSheetTheme: const BottomSheetThemeData(
+          backgroundColor: Constants.colorWhiteSmoke),
       primaryColor: Constants.colorDarkBlueDoctorH,
       textSelectionTheme:
           const TextSelectionThemeData(cursorColor: Constants.colorBlack),
-      textButtonTheme: const TextButtonThemeData(
-        style: ButtonStyle(
-          overlayColor: WidgetStatePropertyAll(Constants.colorLightBlueDoctorH),
-        ),
-      ),
+
       fontFamily: "Museo Sans", // Updated to Museo Sans
-      bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: Colors.white, // Changed to white
-      ),
       scaffoldBackgroundColor: Colors.white, // Changed to white
       primaryColorLight: Constants.colorDarkBlueDoctorH,
       highlightColor: Constants.colorLightBlueDoctorH,
@@ -54,13 +49,11 @@ abstract class AppThemes {
       textTheme: TextTheme(
         // body fonts
         bodySmall: TextStyle(
-          color: Constants.colorBlack,
           fontSize:
               ResponsiveFontSize.responsiveFontSize(context, fontSize: 14),
           fontFamily: "Museo Sans", // Use Museo Sans
         ),
         bodyMedium: TextStyle(
-          color: Constants.colorBlack,
           fontSize:
               ResponsiveFontSize.responsiveFontSize(context, fontSize: 16),
           fontFamily: "Museo Sans", // Use Museo Sans
@@ -74,36 +67,33 @@ abstract class AppThemes {
 
         // headline fonts
         headlineSmall: TextStyle(
-          color: Constants.colorBlack,
           fontSize:
               ResponsiveFontSize.responsiveFontSize(context, fontSize: 23),
           fontFamily: "Museo Sans", // Use Museo Sans
         ),
         headlineMedium: TextStyle(
-          color: Constants.colorBlack,
           fontSize:
               ResponsiveFontSize.responsiveFontSize(context, fontSize: 35),
           fontFamily: "Museo Sans", // Use Museo Sans
         ),
         headlineLarge: TextStyle(
-          color: Constants.colorBlack,
           fontSize:
               ResponsiveFontSize.responsiveFontSize(context, fontSize: 50),
           fontFamily: "Museo Sans", // Use Museo Sans
         ),
       ),
-      elevatedButtonTheme: const ElevatedButtonThemeData(
-        style: ButtonStyle(
-          textStyle: WidgetStatePropertyAll(
-              TextStyle(color: Constants.colorBlack, fontSize: 16)),
-          overlayColor: WidgetStatePropertyAll(Constants.colorTransparentBlack),
-          backgroundColor:
-              WidgetStatePropertyAll(Constants.colorDarkBlueDoctorH),
-          shadowColor: WidgetStatePropertyAll(Constants.colorBlue),
-          foregroundColor: WidgetStatePropertyAll(Constants.colorWhiteSmoke),
-          padding: WidgetStatePropertyAll(EdgeInsets.all(15)),
-        ),
-      ),
+      // elevatedButtonTheme: const ElevatedButtonThemeData(
+      //   style: ButtonStyle(
+      //     textStyle: WidgetStatePropertyAll(
+      //         TextStyle(color: Constants.colorBlack, fontSize: 16)),
+      //     overlayColor: WidgetStatePropertyAll(Constants.colorTransparentBlack),
+      //     backgroundColor:
+      //         WidgetStatePropertyAll(Constants.colorDarkBlueDoctorH),
+      //     shadowColor: WidgetStatePropertyAll(Constants.colorBlue),
+      //     foregroundColor: WidgetStatePropertyAll(Constants.colorBlack),
+      //     padding: WidgetStatePropertyAll(EdgeInsets.all(15)),
+      //   ),
+      // ),
       iconTheme: const IconThemeData(color: Constants.colorDarkBlueDoctorH),
     );
   }
@@ -111,19 +101,17 @@ abstract class AppThemes {
   static ThemeData dark(BuildContext context) {
     return ThemeData(
       primaryColor: Constants.colorLightBlueDoctorH,
+
       textSelectionTheme:
           const TextSelectionThemeData(cursorColor: Constants.colorWhite),
-      textButtonTheme: const TextButtonThemeData(
-        style: ButtonStyle(
-          overlayColor: WidgetStatePropertyAll(Constants.colorLightBlueDoctorH),
-        ),
-      ),
+
       iconTheme: const IconThemeData(color: Constants.colorDarkBlueDoctorH),
       fontFamily: "Museo Sans", // Updated to Museo Sans
       bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: Colors.white, // Changed to white
+        backgroundColor: Constants.colorBlack, // Changed to white
       ),
-      scaffoldBackgroundColor: Constants.colorBlack, // Changed to white
+      scaffoldBackgroundColor:
+          const Color.fromARGB(255, 22, 22, 22), // Changed to white
       colorScheme: const ColorScheme.dark(
         primary: Constants.colorDarkBlueDoctorH,
         onPrimary: Constants.colorLightBlueDoctorH,
@@ -159,56 +147,50 @@ abstract class AppThemes {
       brightness: Brightness.dark,
       textTheme: TextTheme(
         bodySmall: TextStyle(
-          color: Constants.colorWhiteSmoke,
           fontSize:
               ResponsiveFontSize.responsiveFontSize(context, fontSize: 14),
           fontWeight: FontWeight.w300,
           fontFamily: "Museo Sans", // Use Museo Sans
         ),
         bodyMedium: TextStyle(
-          color: Constants.colorWhiteSmoke,
           fontSize:
               ResponsiveFontSize.responsiveFontSize(context, fontSize: 16),
           fontWeight: FontWeight.w300,
           fontFamily: "Museo Sans", // Use Museo Sans
         ),
         bodyLarge: TextStyle(
-          color: Constants.colorWhiteSmoke,
           fontSize:
               ResponsiveFontSize.responsiveFontSize(context, fontSize: 20),
           fontWeight: FontWeight.w300,
           fontFamily: "Museo Sans", // Use Museo Sans
         ),
         headlineSmall: TextStyle(
-          color: Constants.colorWhiteSmoke,
           fontSize:
               ResponsiveFontSize.responsiveFontSize(context, fontSize: 23),
           fontFamily: "Museo Sans", // Use Museo Sans
         ),
         headlineMedium: TextStyle(
-          color: Constants.colorWhiteSmoke,
           fontSize:
               ResponsiveFontSize.responsiveFontSize(context, fontSize: 35),
           fontWeight: FontWeight.w300,
           fontFamily: "Museo Sans", // Use Museo Sans
         ),
         headlineLarge: TextStyle(
-          color: Constants.colorWhiteSmoke,
           fontSize:
               ResponsiveFontSize.responsiveFontSize(context, fontSize: 50),
           fontFamily: "Museo Sans", // Use Museo Sans
         ),
       ),
-      elevatedButtonTheme: const ElevatedButtonThemeData(
-        style: ButtonStyle(
-          textStyle: WidgetStatePropertyAll(
-              TextStyle(color: Constants.colorBlack, fontSize: 16)),
-          backgroundColor: WidgetStatePropertyAll(Constants.colorBlack),
-          overlayColor: WidgetStatePropertyAll(Constants.colorDarkBlueDoctorH),
-          foregroundColor: WidgetStatePropertyAll(Constants.colorWhiteSmoke),
-          padding: WidgetStatePropertyAll(EdgeInsets.all(15)),
-        ),
-      ),
+      // elevatedButtonTheme: const ElevatedButtonThemeData(
+      //   style: ButtonStyle(
+      //     textStyle: WidgetStatePropertyAll(
+      //         TextStyle(color: Constants.colorBlack, fontSize: 16)),
+      //     backgroundColor: WidgetStatePropertyAll(Constants.colorBlack),
+      //     overlayColor: WidgetStatePropertyAll(Constants.colorDarkBlueDoctorH),
+      //     foregroundColor: WidgetStatePropertyAll(Constants.colorWhiteSmoke),
+      //     padding: WidgetStatePropertyAll(EdgeInsets.all(15)),
+      //   ),
+      // ),
     );
   }
 }

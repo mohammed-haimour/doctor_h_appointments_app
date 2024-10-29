@@ -4,7 +4,7 @@ class Constants {
   Constants._();
   // - App Colors
   static const Color colorBlack = Colors.black;
-  static const Color colorLightBlack = Color.fromRGBO(24, 24, 24, 1.0);
+  static const Color colorLightBlack = Color.fromRGBO(39, 39, 39, 1);
   static const Color colorTransparentBlack = Color.fromRGBO(10, 10, 10, 0.5);
   static const Color colorWhite = Colors.white;
   static const Color colorStartGolden = Color(0xFFF9E000);

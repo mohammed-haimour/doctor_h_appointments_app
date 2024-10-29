@@ -6,6 +6,7 @@ part of 'login_payload_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+// ignore: unused_element
 LoginPayloadModel _$LoginPayloadModelFromJson(Map<String, dynamic> json) =>
     LoginPayloadModel(
       email: json['email'] as String,
