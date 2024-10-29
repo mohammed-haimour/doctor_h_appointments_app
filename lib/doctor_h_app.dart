@@ -23,14 +23,6 @@ class DoctorHApp extends StatelessWidget {
       child:
           BlocBuilder<GetSaveUserInformationCubit, GetSaveUserInformationState>(
         builder: (context, state) {
-          print(
-              "email ${getIt<UserBusinessInterface>().userInformation?.email ?? "null"}");
-          print(
-              "theme ${getIt<UserBusinessInterface>().userInformation?.theme ?? "null"}");
-          print(
-              "ps ${getIt<UserBusinessInterface>().userInformation?.password ?? "null"}");
-                        print(
-              "token ${getIt<UserBusinessInterface>().userInformation?.token ?? "null"}");
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               theme: AppThemes.light(context),
