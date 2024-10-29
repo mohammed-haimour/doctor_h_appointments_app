@@ -50,9 +50,7 @@ class GetSaveUserInformationCubit extends Cubit<GetSaveUserInformationState> {
     if (getIt<UserBusinessInterface>().userInformation == null) {
       await saveUserInformation(
               userInformationToSave: UserInformationEntity(
-                  email: null,
-                  password: null,
-                  theme: ThemeMode.light))
+                  email: null, password: null, theme: ThemeMode.light))
           .then(
         (value) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -62,11 +60,10 @@ class GetSaveUserInformationCubit extends Cubit<GetSaveUserInformationState> {
                 size: 60,
               ),
               CustomSpace.vertical(),
-              Text("Personalize Your Experiance",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineSmall!
-                      .copyWith(fontWeight: FontWeight.w600)),
+              const Text(
+                "Personalize Your Experiance",
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+              ),
               CustomSpace.vertical(),
               const Text("Choose App Theme"),
               CustomSpace.vertical(space: 10),
@@ -80,7 +77,7 @@ class GetSaveUserInformationCubit extends Cubit<GetSaveUserInformationState> {
 
   Future<void> autoLogIn(BuildContext context) async {
     if (getIt<UserBusinessInterface>().userInformation?.isNotNull() ?? false) {
-      context.read<LogInCubit>().logInWithSavedUserInformation(); 
+      context.read<LogInCubit>().logInWithSavedUserInformation();
       WidgetsBinding.instance.addPostFrameCallback((_) {
         customBottomSheet(context, isCloseAble: true, children: [
           const Icon(
@@ -88,11 +85,10 @@ class GetSaveUserInformationCubit extends Cubit<GetSaveUserInformationState> {
             size: 60,
           ),
           CustomSpace.vertical(),
-          Text("Loging You In",
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineSmall!
-                  .copyWith(fontWeight: FontWeight.w600)),
+          const Text(
+            "Loging You In",
+            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+          ),
           CustomSpace.vertical(),
           const Text("Please wait a moment"),
           CustomSpace.vertical(),

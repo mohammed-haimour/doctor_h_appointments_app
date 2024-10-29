@@ -1,3 +1,5 @@
+import 'package:doctor_h_appointments_app/business/user/user_business_interface.dart';
+import 'package:doctor_h_appointments_app/shared/di/dependency_injection.dart';
 import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -31,14 +33,18 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-
       controller: controller,
       decoration: InputDecoration(
-        hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Constants.colorGrey ,fontWeight: FontWeight.w300),
-        prefixIcon: Icon(prefixIcon , color: Constants.colorGrey,),
+        hintStyle: Theme.of(context)
+            .textTheme
+            .bodyMedium!
+            .copyWith(color: Constants.colorGrey, fontWeight: FontWeight.w300),
+        prefixIcon: Icon(
+          prefixIcon,
+          color: Constants.colorGrey,
+        ),
         isDense: true,
-        contentPadding: contentPadding ??
-            Constants.paddingSmall,
+        contentPadding: contentPadding ?? Constants.paddingSmall,
         focusedBorder: focusedBorder ??
             OutlineInputBorder(
               borderSide: const BorderSide(
@@ -72,10 +78,15 @@ class CustomTextFormField extends StatelessWidget {
         // hintStyle: hintStyle ?? TextStyles.font14LightGrayRegular,
         hintText: hintText,
         suffixIcon: suffixIcon,
-        fillColor: backgroundColor ?? Constants.colorWhiteLessSmoke,
+        fillColor: backgroundColor ??
+            ((getIt<UserBusinessInterface>().userInformation?.theme ??
+                        ThemeMode.light) ==
+                    ThemeMode.light
+                ? Constants.colorWhiteLessSmoke
+                : Constants.colorBlack),
         filled: true,
       ),
-      style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Constants.colorLightBlack),
+      style: Theme.of(context).textTheme.bodyMedium!,
       validator: (value) {
         return validator(value);
       },

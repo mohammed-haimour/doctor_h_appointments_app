@@ -1,4 +1,6 @@
 import 'dart:math';
+import 'package:doctor_h_appointments_app/business/user/user_business_interface.dart';
+import 'package:doctor_h_appointments_app/shared/di/dependency_injection.dart';
 import 'package:intl/intl.dart';
 
 import 'package:doctor_h_appointments_app/data/doctors/models/get_all_doctors/get_all_doctors_response_model.dart';
@@ -44,7 +46,10 @@ class DoctorCard extends StatelessWidget {
       height: 200,
       decoration: BoxDecoration(
         borderRadius: Constants.radiusLarge,
-        color: Constants.colorWhiteBlueVeryLight,
+        color: getIt<UserBusinessInterface>().userInformation!.theme! ==
+                ThemeMode.light
+            ? Constants.colorWhiteBlueVeryLight
+            : Constants.colorLightBlack,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -132,6 +137,7 @@ class DoctorCard extends StatelessWidget {
                   const Icon(
                     Icons.access_time,
                     size: 20,
+                    color: Color.fromARGB(220, 74, 100, 130),
                   ),
                   CustomSpace.horizontal(space: 4),
                   Text(

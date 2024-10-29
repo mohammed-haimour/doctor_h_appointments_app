@@ -1,4 +1,6 @@
+import 'package:doctor_h_appointments_app/business/user/user_business_interface.dart';
 import 'package:doctor_h_appointments_app/generated/assets.dart';
+import 'package:doctor_h_appointments_app/shared/di/dependency_injection.dart';
 import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_space.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +72,10 @@ class CategoryCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: Constants.colorWhiteBlueVeryLight,
+        color: getIt<UserBusinessInterface>().userInformation!.theme! ==
+                ThemeMode.light
+            ? Constants.colorWhiteBlueVeryLight
+            : Constants.colorLightBlack,
         borderRadius: Constants.radiusLarge,
       ),
       child: Column(
