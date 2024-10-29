@@ -86,3 +86,8 @@ class ServerFailure extends Failure {
     }
   }
 }
+
+class LocalDbFailure extends Failure {
+  LocalDbFailure(super.message);
+
+}
