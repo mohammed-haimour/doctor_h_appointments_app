@@ -10,20 +10,38 @@ import 'package:doctor_h_appointments_app/data/user/models/login/login_payload_m
 import 'package:doctor_h_appointments_app/data/user/models/login/login_reponse_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/user_information/user_information_model.dart';
 import 'package:doctor_h_appointments_app/data/user/user_data_interface.dart';
+import 'package:doctor_h_appointments_app/shared/networking/dio_factory.dart';
 import 'package:doctor_h_appointments_app/shared/networking/errors/api_error_handler.dart';
+import 'package:flutter/material.dart';
 
 class UserBusinessImplementation implements UserBusinessInterface {
-  final UserDataInterface _userData;
+  final UserDataInterface _userDataLayer;
 
   UserBusinessImplementation({required UserDataInterface userDataInterface})
-      : _userData = userDataInterface;
+      : _userDataLayer = userDataInterface;
+
+  UserInformationEntity? _userInformation;
+
+  @override
+  UserInformationEntity? get userInformation => _userInformation;
 
   @override
   Future<Either<Failure, LoginResultEntity>> logIn(
       {required LoginPayloadModel loginPayload}) async {
     try {
       LoginResponseModel responseModel =
-          await _userData.login(loginPayload: loginPayload);
+          await _userDataLayer.login(loginPayload: loginPayload);
+
+      // saving user credintials to local db
+      if (responseModel.code == 200) {
+        saveUserInformation(
+            userToSave: _userInformation!.copyWith(
+                email: loginPayload.email,
+                password: loginPayload.password,
+                token: responseModel.userDataAndToken.token));
+        DioFactory.setTokenIntoHeaderAfterLogin(
+            responseModel.userDataAndToken.token);
+      }
 
       LoginResultEntity loginResponseEntity =
           LoginResultEntity.fromLoginResponseModel(model: responseModel);
@@ -41,12 +59,25 @@ class UserBusinessImplementation implements UserBusinessInterface {
   Future<Either<Failure, CreateAccountResultEntity>> createAccount(
       {required CreateAccountPayloadModel createAccountPayload}) async {
     try {
-      CreateAccountResponseModel responseModel = await _userData.createAccount(
-          createAccountPayload: createAccountPayload);
+      CreateAccountResponseModel responseModel = await _userDataLayer
+          .createAccount(createAccountPayload: createAccountPayload);
+
+      // saving user credintials to local db
+      if (responseModel.code == 200) {
+        saveUserInformation(
+            userToSave: _userInformation!.copyWith(
+                email: createAccountPayload.email,
+                password: createAccountPayload.password,
+                token: responseModel.userDataAndToken.token));
+        DioFactory.setTokenIntoHeaderAfterLogin(
+            responseModel.userDataAndToken.token);
+      }
 
       CreateAccountResultEntity createAccountResultEntity =
           CreateAccountResultEntity.fromCreateAccountResponseModel(
               model: responseModel);
+
+      // save user data
 
       return right(createAccountResultEntity);
     } on Exception catch (error) {
@@ -58,16 +89,20 @@ class UserBusinessImplementation implements UserBusinessInterface {
   }
 
   @override
-  Future<Either<Failure, UserInformationEntity?>> getUserInformation() async {
+  Future<Either<Failure, void>> getUserInformation() async {
     try {
-      UserInformationModel? model = await _userData.getUserInformation();
+      UserInformationModel? model = await _userDataLayer.getUserInformation();
 
-      if (model == null) return right(null);
+      if (model == null) {
+        return right(null);
+      }
 
       UserInformationEntity entity =
           UserInformationEntity.fromUserInformationModel(model: model);
 
-      return right(entity);
+      _userInformation = entity;
+
+      return right(null);
     } on Exception catch (error) {
       return left(LocalDbFailure(error.toString()));
     }
@@ -75,32 +110,27 @@ class UserBusinessImplementation implements UserBusinessInterface {
 
   @override
   Future<Either<Failure, void>> saveUserInformation(
-      {required UserInformationModel userToSave}) async {
-    try {
-      await _userData.saveUserInformation(userInformation: userToSave);
-      return right(null); // what should i do here OH nothing LOL
-    } on Exception catch (error) {
-      return left(LocalDbFailure(error.toString()));
-    }
-  }
+      {required UserInformationEntity userToSave}) async {
+    if (_userInformation != userToSave) {
+      try {
+        UserInformationModel userInformationModel = UserInformationModel(
+          email: userToSave.email,
+          password: userToSave.password,
+          theme: userToSave.theme == null
+              ? null
+              : userToSave.theme == ThemeMode.light
+                  ? "light"
+                  : "dark",
+        );
 
-  @override
-  Future<bool> isUserInformationStoredInTheLocalDb() async {
-    try {
-      UserInformationModel? userInformation =
-          await _userData.getUserInformation();
-
-      if (userInformation == null) {
-        print("there are null");
-        return false;
-      } else {
-        print("there are not null");
-
-        return true;
+        await _userDataLayer.saveUserInformation(
+            userInformation: userInformationModel);
+        return right(null); // what should i do here OH nothing LOL
+      } on Exception catch (error) {
+        return left(LocalDbFailure(error.toString()));
       }
-    } on Exception {
-        print("there are null but error");
-      return false;
+    } else {
+      return right(null);
     }
   }
 }

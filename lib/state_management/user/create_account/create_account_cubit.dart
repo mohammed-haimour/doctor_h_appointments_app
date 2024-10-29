@@ -8,9 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'create_account_state.dart';
 
-
 class CreateAccountCubit extends Cubit<CreateAccountState> {
-
   final UserBusinessInterface _userBusiness;
   CreateAccountCubit(this._userBusiness) : super(CreateAccountInitial());
 
@@ -18,32 +16,33 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
   final TextEditingController nameFieldController = TextEditingController();
   final TextEditingController emailFieldController = TextEditingController();
   final TextEditingController passwordFieldController = TextEditingController();
-  final TextEditingController phoneNumberFieldController = TextEditingController();
+  final TextEditingController phoneNumberFieldController =
+      TextEditingController();
 
-  dynamic emailValidation(value){
-    if(value == null || value.isEmpty){
+  dynamic emailValidation(value) {
+    if (value == null || value.isEmpty) {
       return "Please enter the email";
-    }else{
-      if(EmailValidator.validate(value)){
+    } else {
+      if (EmailValidator.validate(value)) {
         return null;
-      }else{
+      } else {
         return "Please enter a valid email";
       }
     }
   }
 
-  dynamic passwordValidation(value){
-    if(value == null || value.isEmpty){
+  dynamic passwordValidation(value) {
+    if (value == null || value.isEmpty) {
       return "Please enter the password";
-    }else{
+    } else {
       return null;
     }
   }
 
-  dynamic nameValidation(value){
-    if(value == null || value.isEmpty){
+  dynamic nameValidation(value) {
+    if (value == null || value.isEmpty) {
       return "Please enter your name";
-    }else{
+    } else {
       return null;
     }
   }
@@ -62,34 +61,40 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
     }
   }
 
-
-  CreateAccountPayloadModel? validatingAndModelingInPayLoadModel(){
-    if(formKey.currentState!.validate()){
+  CreateAccountPayloadModel? validatingAndModelingInPayLoadModel() {
+    if (formKey.currentState!.validate()) {
       // modeling
-      return CreateAccountPayloadModel(email: emailFieldController.text, password: passwordFieldController.text, name: nameFieldController.text, phone: phoneNumberFieldController.text , gender: "0", passwordConfirmation: passwordFieldController.text);
-    }else{
+      return CreateAccountPayloadModel(
+          email: emailFieldController.text,
+          password: passwordFieldController.text,
+          name: nameFieldController.text,
+          phone: phoneNumberFieldController.text,
+          gender: "0",
+          passwordConfirmation: passwordFieldController.text);
+    } else {
       //cancel
       return null;
     }
   }
 
+  Future<void> createAccount() async {
+    CreateAccountPayloadModel? payload = validatingAndModelingInPayLoadModel();
 
-  Future<void> createAccount()
-  async{
-    CreateAccountPayloadModel ? payload = validatingAndModelingInPayLoadModel();
-
-    if(payload == null) return;
+    if (payload == null) return;
 
     emit(CreateAccountLoading());
 
-    var result = await _userBusiness.createAccount(createAccountPayload: payload);
+    var result =
+        await _userBusiness.createAccount(createAccountPayload: payload);
 
-    void ifFailure(Failure failure)=>emit(CreateAccountFailure(message: failure.message));
-    void ifSuccess(CreateAccountResultEntity entity)=>emit(CreateAccountSuccess(createAccountResultEntity: entity));
+    void ifFailure(Failure failure) =>
+        emit(CreateAccountFailure(message: failure.message));
+    void ifSuccess(CreateAccountResultEntity entity) =>
+        emit(CreateAccountSuccess(createAccountResultEntity: entity));
 
     result.fold(
-          ifFailure,
-          ifSuccess,
+      ifFailure,
+      ifSuccess,
     );
   }
 

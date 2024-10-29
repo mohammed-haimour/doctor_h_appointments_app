@@ -9,22 +9,12 @@ import 'package:doctor_h_appointments_app/state_management/user/get_save_user_in
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CreateAccountScreen extends StatefulWidget {
+class CreateAccountScreen extends StatelessWidget {
   const CreateAccountScreen({super.key});
 
   @override
-  State<CreateAccountScreen> createState() => _CreateAccountScreenState();
-}
-
-class _CreateAccountScreenState extends State<CreateAccountScreen> {
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    context.read<GetSaveUserInformationCubit>().selectYourTheme(context);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    context.read<GetSaveUserInformationCubit>().selectYourTheme(context);
     return Scaffold(
       body: CustomScreenWrapper(
         child: Column(
@@ -33,8 +23,11 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
           children: [
             RegistrationHeader(),
             CreateAccountForm(),
-            CustomButton(text: "delete akk", onPressed: () async{  await SecureStorageFactory.getStorage().deleteAll();
-}),
+            CustomButton(
+                text: "delete akk",
+                onPressed: () async {
+                  await SecureStorageFactory.getStorage().deleteAll();
+                }),
             RegistrationFooter(
               registrationType: RegistrationTypeEnum.createAccount,
             ),

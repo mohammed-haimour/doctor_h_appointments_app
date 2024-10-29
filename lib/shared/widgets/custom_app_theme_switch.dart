@@ -1,4 +1,5 @@
-import 'package:doctor_h_appointments_app/data/user/models/user_information/user_information_model.dart';
+import 'package:doctor_h_appointments_app/business/user/user_business_interface.dart';
+import 'package:doctor_h_appointments_app/shared/di/dependency_injection.dart';
 import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_space.dart';
 import 'package:doctor_h_appointments_app/state_management/user/get_save_user_information/get_save_user_information_cubit.dart';
@@ -6,63 +7,53 @@ import 'package:doctor_h_appointments_app/state_management/user/get_save_user_in
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CustomAppThemeSwitch extends StatefulWidget {
+class CustomAppThemeSwitch extends StatelessWidget {
   const CustomAppThemeSwitch({super.key});
-
-  @override
-  State<CustomAppThemeSwitch> createState() => _CustomAppThemeSwitchState();
-}
-
-class _CustomAppThemeSwitchState extends State<CustomAppThemeSwitch> {
-  // i like to do it in this way because i will write less code LOL ,, i know the reaability is trash but
-  // it s just a simple widget LOL :) :)
-  final UserInformationModel userToSave = UserInformationModel(
-      email: null, password: null, theme: "light", isQuickAccess: null);
-
-  @override
-  void initState() {
-    context
-        .read<GetSaveUserInformationCubit>()
-        .saveUserInformation(userInformationToSave: userToSave);
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GetSaveUserInformationCubit,
         GetSaveUserInformationState>(
       builder: (context, state) {
+        print("😀");
         return Padding(
           padding: Constants.paddingMedium,
           child: Row(
             children: [
               Expanded(
                   child: ThemeCard(
-                isSelected: userToSave.theme == "light" ? true : false,
+                isSelected:
+                    getIt<UserBusinessInterface>().userInformation!.theme ==
+                            ThemeMode.light
+                        ? true
+                        : false,
                 text: "Light",
                 icon: Icons.light_mode,
                 onPressed: () {
-                  if (userToSave.theme != "light") {
-                    userToSave.copyWith(theme: "light");
-                    context
-                        .read<GetSaveUserInformationCubit>()
-                        .saveUserInformation(userInformationToSave: userToSave);
-                  }
+                  context
+                      .read<GetSaveUserInformationCubit>()
+                      .saveUserInformation(
+                          userInformationToSave: getIt<UserBusinessInterface>()
+                              .userInformation!
+                              .copyWith(theme: ThemeMode.light));
                 },
               )),
               CustomSpace.horizontal(),
               Expanded(
                   child: ThemeCard(
-                isSelected: userToSave.theme == "dark" ? true : false,
+                isSelected:
+                    getIt<UserBusinessInterface>().userInformation!.theme ==
+                            ThemeMode.dark
+                        ? true
+                        : false,
                 text: "Dark",
                 icon: Icons.dark_mode_sharp,
                 onPressed: () {
-                  if (userToSave.theme != "dark") {
-                    userToSave.copyWith(theme: "dark");
-                    context
-                        .read<GetSaveUserInformationCubit>()
-                        .saveUserInformation(userInformationToSave: userToSave);
-                  }
+                  context
+                      .read<GetSaveUserInformationCubit>()
+                      .saveUserInformation(
+                          userInformationToSave: getIt<UserBusinessInterface>()
+                              .userInformation!
+                              .copyWith(theme: ThemeMode.dark));
                 },
               )),
             ],

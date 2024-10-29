@@ -8,12 +8,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   setUpGetIt(); // i always forgot this shit :)
-  final bool isUserStoredInTheLocal = await getIt<UserBusinessInterface>()
-      .isUserInformationStoredInTheLocalDb();
+  await getIt<UserBusinessInterface>()
+      .getUserInformation();
 
-      
   runApp(DoctorHApp(
     appRouter: AppRouter(),
-    isUserStoredInTheLocalDb: isUserStoredInTheLocal,
   ));
 }

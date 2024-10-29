@@ -7,34 +7,44 @@ import 'package:doctor_h_appointments_app/state_management/user/get_save_user_in
 import 'package:doctor_h_appointments_app/state_management/user/get_save_user_information/get_save_user_information_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 class DoctorHApp extends StatelessWidget {
   final AppRouter appRouter;
-  final bool isUserStoredInTheLocalDb;
-  const DoctorHApp({super.key, required this.appRouter, required this.isUserStoredInTheLocalDb});
+  const DoctorHApp({
+    super.key,
+    required this.appRouter,
+  });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          GetSaveUserInformationCubit(getIt<UserBusinessInterface>())..getUserInformation(),
+          GetSaveUserInformationCubit(getIt<UserBusinessInterface>()),
       child:
           BlocBuilder<GetSaveUserInformationCubit, GetSaveUserInformationState>(
         builder: (context, state) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: AppThemes.light(context),
-            darkTheme: AppThemes.dark(context),
-            themeMode: context
-                    .read<GetSaveUserInformationCubit>()
-                    .userInformation
-                    ?.theme ??
-                ThemeMode.light,
-            initialRoute: (isUserStoredInTheLocalDb == true)
-                ? Routes.logInScreen
-                : Routes.onBoardingScreen,
-            title: 'Doctor H App',
-            onGenerateRoute: appRouter.generateRoute,
-          );
+          print(
+              "email ${getIt<UserBusinessInterface>().userInformation?.email ?? "null"}");
+          print(
+              "theme ${getIt<UserBusinessInterface>().userInformation?.theme ?? "null"}");
+          print(
+              "ps ${getIt<UserBusinessInterface>().userInformation?.password ?? "null"}");
+                        print(
+              "token ${getIt<UserBusinessInterface>().userInformation?.token ?? "null"}");
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: AppThemes.light(context),
+              darkTheme: AppThemes.dark(context),
+              themeMode:
+                  getIt<UserBusinessInterface>().userInformation?.theme ??
+                      ThemeMode.light,
+              initialRoute: (getIt<UserBusinessInterface>().userInformation == null)
+                  ? Routes.onBoardingScreen
+                  : (getIt<UserBusinessInterface>().userInformation!.theme == null)? Routes.createAccountScreen : (getIt<UserBusinessInterface>().userInformation!.email == null) ? Routes.logInScreen : Routes.homeScreen,
+              title: 'Doctor H App',
+              onGenerateRoute: appRouter.generateRoute,
+            );
+  
         },
       ),
     );

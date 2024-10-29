@@ -37,5 +37,4 @@ Future<void> setUpGetIt() async {
           localSource: DoctorsDataLocalSource()));
   getIt.registerLazySingleton<DoctorsBusinessInterface>(
       () => DoctorsBusinessImplementation(doctorsData: getIt()));
-
 }
