@@ -44,30 +44,37 @@ class GetSaveUserInformationCubit extends Cubit<GetSaveUserInformationState> {
     result.fold(ifFailure, ifSuccess);
   }
 
-  Future<void> selectYourTheme(BuildContext context) async{
+  Future<void> selectYourTheme(BuildContext context) async {
     // Show the custom bottom sheet if userData is null
     if (getIt<UserBusinessInterface>().userInformation == null) {
       await saveUserInformation(
-          userInformationToSave: UserInformationEntity(
-              email: null, password: null, theme: ThemeMode.light,token: null));
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        customBottomSheet(context, isCloseAble: true, children: [
-          const Icon(
-            Icons.format_paint,
-            size: 60,
-          ),
-          CustomSpace.vertical(),
-          Text("Personalize Your Experiance",
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineSmall!
-                  .copyWith(fontWeight: FontWeight.w600)),
-          CustomSpace.vertical(),
-          const Text("Choose App Theme"),
-          CustomSpace.vertical(space: 10),
-          const CustomAppThemeSwitch(),
-        ]);
-      });
+              userInformationToSave: UserInformationEntity(
+                  email: null,
+                  password: null,
+                  theme: ThemeMode.light,
+                  token: null))
+          .then(
+        (value) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            customBottomSheet(context, isCloseAble: true, children: [
+              const Icon(
+                Icons.format_paint,
+                size: 60,
+              ),
+              CustomSpace.vertical(),
+              Text("Personalize Your Experiance",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall!
+                      .copyWith(fontWeight: FontWeight.w600)),
+              CustomSpace.vertical(),
+              const Text("Choose App Theme"),
+              CustomSpace.vertical(space: 10),
+              const CustomAppThemeSwitch(),
+            ]);
+          });
+        },
+      );
     }
   }
 }

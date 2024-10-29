@@ -9,12 +9,22 @@ import 'package:doctor_h_appointments_app/state_management/user/get_save_user_in
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CreateAccountScreen extends StatelessWidget {
+class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  State<CreateAccountScreen> createState() => _CreateAccountScreenState();
+}
+
+class _CreateAccountScreenState extends State<CreateAccountScreen> {
+  @override
+  void initState() {
     context.read<GetSaveUserInformationCubit>().selectYourTheme(context);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScreenWrapper(
         child: Column(
