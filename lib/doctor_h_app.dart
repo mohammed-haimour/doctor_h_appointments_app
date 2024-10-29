@@ -32,7 +32,7 @@ class DoctorHApp extends StatelessWidget {
                       ThemeMode.light,
               initialRoute: (getIt<UserBusinessInterface>().userInformation == null)
                   ? Routes.onBoardingScreen
-                  : (getIt<UserBusinessInterface>().userInformation!.theme == null)? Routes.createAccountScreen : (getIt<UserBusinessInterface>().userInformation!.email == null) ? Routes.logInScreen : Routes.homeScreen,
+                  : (getIt<UserBusinessInterface>().userInformation!.theme == null)? Routes.createAccountScreen : Routes.logInScreen ,
               title: 'Doctor H App',
               onGenerateRoute: appRouter.generateRoute,
             );

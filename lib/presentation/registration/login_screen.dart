@@ -3,10 +3,23 @@ import 'package:doctor_h_appointments_app/presentation/registration/widgets/log_
 import 'package:doctor_h_appointments_app/presentation/registration/widgets/registration_footer.dart';
 import 'package:doctor_h_appointments_app/presentation/registration/widgets/registration_header.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_screen_wrapper.dart';
+import 'package:doctor_h_appointments_app/state_management/user/get_save_user_information/get_save_user_information_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LogInScreen extends StatelessWidget {
+class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
+
+  @override
+  State<LogInScreen> createState() => _LogInScreenState();
+}
+
+class _LogInScreenState extends State<LogInScreen> {
+  @override
+  void initState() {
+    context.read<GetSaveUserInformationCubit>().autoLogIn(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

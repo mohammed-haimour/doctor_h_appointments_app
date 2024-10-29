@@ -5,6 +5,7 @@ import 'package:doctor_h_appointments_app/shared/networking/errors/api_error_han
 import 'package:doctor_h_appointments_app/shared/widgets/custom_app_theme_switch.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_bottom_sheet.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_space.dart';
+import 'package:doctor_h_appointments_app/state_management/user/login/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -51,8 +52,7 @@ class GetSaveUserInformationCubit extends Cubit<GetSaveUserInformationState> {
               userInformationToSave: UserInformationEntity(
                   email: null,
                   password: null,
-                  theme: ThemeMode.light,
-                  token: null))
+                  theme: ThemeMode.light))
           .then(
         (value) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -75,6 +75,30 @@ class GetSaveUserInformationCubit extends Cubit<GetSaveUserInformationState> {
           });
         },
       );
+    }
+  }
+
+  Future<void> autoLogIn(BuildContext context) async {
+    if (getIt<UserBusinessInterface>().userInformation?.isNotNull() ?? false) {
+      context.read<LogInCubit>().logInWithSavedUserInformation(); 
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        customBottomSheet(context, isCloseAble: true, children: [
+          const Icon(
+            Icons.login,
+            size: 60,
+          ),
+          CustomSpace.vertical(),
+          Text("Loging You In",
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineSmall!
+                  .copyWith(fontWeight: FontWeight.w600)),
+          CustomSpace.vertical(),
+          const Text("Please wait a moment"),
+          CustomSpace.vertical(),
+          const CircularProgressIndicator()
+        ]);
+      });
     }
   }
 }

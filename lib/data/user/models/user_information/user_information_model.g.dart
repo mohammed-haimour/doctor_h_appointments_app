@@ -12,7 +12,6 @@ UserInformationModel _$UserInformationModelFromJson(
       email: json['email'] as String?,
       password: json['password'] as String?,
       theme: json['theme'] as String?,
-      token: json['token'] as String?,
     );
 
 Map<String, dynamic> _$UserInformationModelToJson(
@@ -21,5 +20,4 @@ Map<String, dynamic> _$UserInformationModelToJson(
       'email': instance.email,
       'password': instance.password,
       'theme': instance.theme,
-      'token': instance.token,
     };
