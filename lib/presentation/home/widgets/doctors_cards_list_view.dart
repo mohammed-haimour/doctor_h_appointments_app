@@ -46,7 +46,7 @@ class DoctorCard extends StatelessWidget {
       height: 200,
       decoration: BoxDecoration(
         borderRadius: Constants.radiusLarge,
-        color: getIt<UserBusinessInterface>().userInformation!.theme! ==
+        color: getIt<UserBusinessInterface>().userPreferences!.theme! ==
                 ThemeMode.light
             ? Constants.colorWhiteBlueVeryLight
             : Constants.colorLightBlack,

@@ -5,7 +5,7 @@ import 'package:doctor_h_appointments_app/presentation/registration/widgets/regi
 import 'package:doctor_h_appointments_app/shared/local/secure_storage_factory.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_button.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_screen_wrapper.dart';
-import 'package:doctor_h_appointments_app/state_management/user/get_save_user_information/get_save_user_information_cubit.dart';
+import 'package:doctor_h_appointments_app/state_management/user/get_save_user_preferences/get_save_user_preferences_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,7 +19,7 @@ class CreateAccountScreen extends StatefulWidget {
 class _CreateAccountScreenState extends State<CreateAccountScreen> {
   @override
   void initState() {
-    context.read<GetSaveUserInformationCubit>().selectYourTheme(context);
+    context.read<GetSaveUserPreferencesCubit>().selectYourTheme(context);
     super.initState();
   }
 

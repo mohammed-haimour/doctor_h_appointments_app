@@ -2,8 +2,8 @@ import 'package:doctor_h_appointments_app/business/user/user_business_interface.
 import 'package:doctor_h_appointments_app/shared/di/dependency_injection.dart';
 import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_space.dart';
-import 'package:doctor_h_appointments_app/state_management/user/get_save_user_information/get_save_user_information_cubit.dart';
-import 'package:doctor_h_appointments_app/state_management/user/get_save_user_information/get_save_user_information_state.dart';
+import 'package:doctor_h_appointments_app/state_management/user/get_save_user_preferences/get_save_user_preferences_cubit.dart';
+import 'package:doctor_h_appointments_app/state_management/user/get_save_user_preferences/get_save_user_preferences_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,8 +11,8 @@ class CustomAppThemeSwitch extends StatelessWidget {
   const CustomAppThemeSwitch({super.key});
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GetSaveUserInformationCubit,
-        GetSaveUserInformationState>(
+    return BlocBuilder<GetSaveUserPreferencesCubit,
+        GetSaveUserPreferencesState>(
       builder: (context, state) {
         return Padding(
           padding: Constants.paddingMedium,
@@ -21,7 +21,7 @@ class CustomAppThemeSwitch extends StatelessWidget {
               Expanded(
                   child: ThemeCard(
                 isSelected:
-                    getIt<UserBusinessInterface>().userInformation!.theme ==
+                    getIt<UserBusinessInterface>().userPreferences!.theme ==
                             ThemeMode.light
                         ? true
                         : false,
@@ -29,10 +29,10 @@ class CustomAppThemeSwitch extends StatelessWidget {
                 icon: Icons.light_mode,
                 onPressed: () {
                   context
-                      .read<GetSaveUserInformationCubit>()
-                      .saveUserInformation(
-                          userInformationToSave: getIt<UserBusinessInterface>()
-                              .userInformation!
+                      .read<GetSaveUserPreferencesCubit>()
+                      .saveUserPreferences(
+                          userPreferencesToSave: getIt<UserBusinessInterface>()
+                              .userPreferences!
                               .copyWith(theme: ThemeMode.light));
                 },
               )),
@@ -40,7 +40,7 @@ class CustomAppThemeSwitch extends StatelessWidget {
               Expanded(
                   child: ThemeCard(
                 isSelected:
-                    getIt<UserBusinessInterface>().userInformation!.theme ==
+                    getIt<UserBusinessInterface>().userPreferences!.theme ==
                             ThemeMode.dark
                         ? true
                         : false,
@@ -48,10 +48,10 @@ class CustomAppThemeSwitch extends StatelessWidget {
                 icon: Icons.dark_mode_sharp,
                 onPressed: () {
                   context
-                      .read<GetSaveUserInformationCubit>()
-                      .saveUserInformation(
-                          userInformationToSave: getIt<UserBusinessInterface>()
-                              .userInformation!
+                      .read<GetSaveUserPreferencesCubit>()
+                      .saveUserPreferences(
+                          userPreferencesToSave: getIt<UserBusinessInterface>()
+                              .userPreferences!
                               .copyWith(theme: ThemeMode.dark));
                 },
               )),

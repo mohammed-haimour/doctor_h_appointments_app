@@ -72,7 +72,7 @@ class CategoryCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: getIt<UserBusinessInterface>().userInformation!.theme! ==
+        color: getIt<UserBusinessInterface>().userPreferences!.theme! ==
                 ThemeMode.light
             ? Constants.colorWhiteBlueVeryLight
             : Constants.colorLightBlack,

@@ -6,7 +6,7 @@ import 'package:doctor_h_appointments_app/data/user/models/create_account/create
 import 'package:doctor_h_appointments_app/data/user/models/create_account/create_account_response_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/login/login_payload_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/login/login_reponse_model.dart';
-import 'package:doctor_h_appointments_app/data/user/models/user_information/user_information_model.dart';
+import 'package:doctor_h_appointments_app/data/user/models/user_preferences/user_preferences_model.dart';
 import 'package:doctor_h_appointments_app/data/user/user_data_interface.dart';
 
 class UserDataImplementation implements UserDataInterface {
@@ -47,26 +47,26 @@ class UserDataImplementation implements UserDataInterface {
   }
 
   @override
-  Future<UserInformationModel?> getUserInformation() async {
-    String? response = await _localSource.getUserInformation();
+  Future<UserPreferencesModel?> getUserPreferences() async {
+    String? response = await _localSource.getUserPreferences();
 
     // if no data saved local so bruh,,,, just return null <3
     if (response == null) return null;
 
     Map<String, dynamic> responseInMap = json.decode(response);
 
-    UserInformationModel user = UserInformationModel.fromJson(responseInMap);
+    UserPreferencesModel user = UserPreferencesModel.fromJson(responseInMap);
 
     return user;
   }
 
   @override
-  Future<void> saveUserInformation(
-      {required UserInformationModel userInformation}) 
-      async{
-    Map<String, dynamic> userInfomationInMap = userInformation.toJson();
+  Future<void> saveUserPreferences(
+      {required UserPreferencesModel userPreferencesToSave}) async {
+    Map<String, dynamic> userInfomationInMap = userPreferencesToSave.toJson();
     String userInfomationInString = jsonEncode(userInfomationInMap);
 
-    await _localSource.saveUserInformation(userInformation: userInfomationInString);
+    await _localSource.saveUserPreferences(
+        userPreferences: userInfomationInString);
   }
 }

@@ -31,7 +31,7 @@ class CustomButton extends StatelessWidget {
               30.0), // Increase this value for more rounded corners
           color: (backGroundColor != null)
               ? backGroundColor
-              : ((getIt<UserBusinessInterface>().userInformation?.theme ??
+              : ((getIt<UserBusinessInterface>().userPreferences?.theme ??
                           ThemeMode.light) ==
                       ThemeMode.light)
                   ? Constants.colorDarkBlueDoctorH

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/create_account/create_account_result_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/login/login_result_entity.dart';
-import 'package:doctor_h_appointments_app/business/user/entities/user_information/user_information_entity.dart';
+import 'package:doctor_h_appointments_app/business/user/entities/user_preferences/user_preferences_entity.dart';
 import 'package:doctor_h_appointments_app/data/user/models/create_account/create_account_payload_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/login/login_payload_model.dart';
 import 'package:doctor_h_appointments_app/shared/networking/errors/api_error_handler.dart';
@@ -9,11 +9,11 @@ import 'package:doctor_h_appointments_app/shared/networking/errors/api_error_han
 abstract class UserBusinessInterface {
   Future<Either<Failure, LoginResultEntity>> logIn(
       {required LoginPayloadModel loginPayload});
-        Future<Either<Failure, LoginResultEntity>> logInWithSavedUserInformation();
+  Future<Either<Failure, LoginResultEntity>> logInWithSavedUserCredentials();
   Future<Either<Failure, CreateAccountResultEntity>> createAccount(
       {required CreateAccountPayloadModel createAccountPayload});
-  Future<Either<Failure, void>> saveUserInformation(
-      {required UserInformationEntity userToSave});
-  Future<Either<Failure, void>> getUserInformation();
-  UserInformationEntity? get userInformation;
+  Future<Either<Failure, void>> saveUserPreferences(
+      {required UserPreferencesEntity userPreferencesToSave});
+  Future<Either<Failure, void>> getUserPreferences();
+  UserPreferencesEntity? get userPreferences;
 }
