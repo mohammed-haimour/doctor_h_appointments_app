@@ -1,6 +1,4 @@
 import 'package:doctor_h_appointments_app/presentation/home/widgets/find_doctors_bloc_builder.dart';
-import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
-import 'package:doctor_h_appointments_app/shared/widgets/custom_button.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_space.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_text_buttom_v2.dart';
 import 'package:flutter/material.dart';
@@ -32,13 +30,6 @@ class FindDoctors extends StatelessWidget {
           ),
           CustomSpace.vertical(space: 10),
           const FindDoctorsBlocBuilder(),
-          CustomSpace.vertical(space: 10),
-          CustomButton(
-            text: "Explore More !",
-            onPressed: () {},
-            isFullWidth: true,
-            backGroundColor: Constants.colorLightBlueDoctorH,
-          )
         ],
       ),
     );

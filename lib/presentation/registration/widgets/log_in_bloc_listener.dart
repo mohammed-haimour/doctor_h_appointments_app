@@ -18,14 +18,14 @@ class LogInBlocListener extends StatefulWidget {
 }
 
 class _LogInBlocListenerState extends State<LogInBlocListener> {
-
   late final TextEditingController _emailFieldController;
   late final TextEditingController _passwordFieldController;
 
   @override
   void initState() {
     _emailFieldController = context.read<LogInCubit>().emailFieldController;
-    _passwordFieldController = context.read<LogInCubit>().passwordFieldController;
+    _passwordFieldController =
+        context.read<LogInCubit>().passwordFieldController;
     super.initState();
   }
 
@@ -33,14 +33,14 @@ class _LogInBlocListenerState extends State<LogInBlocListener> {
   Widget build(BuildContext context) {
     return BlocListener<LogInCubit, LoginState>(
       listener: (context, state) {
-        if(state is LoginSuccess){
+        if (state is LoginSuccess) {
           // to pop the loading dialog :)
           context.pop();
-          context.pushReplacementNamed(Routes.homeScreen);
-        }else if(state is LoginFailure){
+          context.pushReplacementNamed(Routes.mainBottomNavBar);
+        } else if (state is LoginFailure) {
           context.pop();
           customErrorDialog(context, errorMessage: state.message);
-        }else if(state is LoginLoading){
+        } else if (state is LoginLoading) {
           customLoadingDialog(context);
         }
       },
@@ -48,19 +48,40 @@ class _LogInBlocListenerState extends State<LogInBlocListener> {
         children: [
           Column(
             children: [
-              Text("Log In To Your Account" , style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600)),
+              Text("Log In To Your Account",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(fontWeight: FontWeight.w600)),
               CustomSpace.vertical(space: 5),
-              Text("Welcome Back !" , style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w200))
+              Text("Welcome Back !",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall!
+                      .copyWith(fontWeight: FontWeight.w200))
             ],
           ),
           CustomSpace.vertical(space: 40),
-          CustomTextFormField(hintText: "Email",prefixIcon: Icons.mail_rounded ,validator: context.read<LogInCubit>().emailValidation ,controller: _emailFieldController,),
+          CustomTextFormField(
+            hintText: "Email",
+            prefixIcon: Icons.mail_rounded,
+            validator: context.read<LogInCubit>().emailValidation,
+            controller: _emailFieldController,
+          ),
           CustomSpace.vertical(),
-          CustomObscurableFormField(hintText: "Password", prefixIcon: Icons.password, validator: context.read<LogInCubit>().passwordValidation ,controller: _passwordFieldController,),
+          CustomObscurableFormField(
+            hintText: "Password",
+            prefixIcon: Icons.password,
+            validator: context.read<LogInCubit>().passwordValidation,
+            controller: _passwordFieldController,
+          ),
           CustomSpace.vertical(),
-          CustomButton(text: "Log In", onPressed: context.read<LogInCubit>().login, isFullWidth : true)
-      ],
-    ),
-);
+          CustomButton(
+              text: "Log In",
+              onPressed: context.read<LogInCubit>().login,
+              isFullWidth: true)
+        ],
+      ),
+    );
   }
 }

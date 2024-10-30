@@ -8,6 +8,7 @@ class CustomScreenWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      bottom: false,
       child: Container(
           padding: Constants.paddingForScreen,
           width: double.infinity,

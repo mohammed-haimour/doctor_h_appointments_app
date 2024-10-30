@@ -1,9 +1,14 @@
 import 'package:doctor_h_appointments_app/business/doctors/doctors_business_interface.dart';
 import 'package:doctor_h_appointments_app/business/user/user_business_interface.dart';
+import 'package:doctor_h_appointments_app/presentation/book_an_appointment/book_an_appointment_screen.dart';
+import 'package:doctor_h_appointments_app/presentation/doctors/doctors_screen.dart';
 import 'package:doctor_h_appointments_app/presentation/home/home_screen.dart';
+import 'package:doctor_h_appointments_app/presentation/main_bottom_nav_bar/main_bottom_nav_bar.dart';
 import 'package:doctor_h_appointments_app/presentation/on_boarding/on_boarding_screen.dart';
 import 'package:doctor_h_appointments_app/presentation/registration/create_account_screen.dart';
 import 'package:doctor_h_appointments_app/presentation/registration/login_screen.dart';
+import 'package:doctor_h_appointments_app/presentation/settings/settings_screen.dart';
+import 'package:doctor_h_appointments_app/presentation/specializations/specializations_screen.dart';
 import 'package:doctor_h_appointments_app/shared/di/dependency_injection.dart';
 import 'package:doctor_h_appointments_app/shared/routing/routes.dart';
 import 'package:doctor_h_appointments_app/state_management/doctors/get_all_doctors/get_all_doctors_cubit.dart';
@@ -45,6 +50,57 @@ class AppRouter {
             child: const HomeScreen(),
           ),
         );
+
+      case Routes.doctorsScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                GetAllDoctorsCubit(getIt<DoctorsBusinessInterface>())
+                  ..getAllDoctors(),
+            child: const DoctorsScreen(),
+          ),
+        );
+
+      case Routes.bookAnAppointment:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                GetAllDoctorsCubit(getIt<DoctorsBusinessInterface>())
+                  ..getAllDoctors(),
+            child: const BookAnAppointmentScreen(),
+          ),
+        );
+
+      case Routes.mainBottomNavBar:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                GetAllDoctorsCubit(getIt<DoctorsBusinessInterface>())
+                  ..getAllDoctors(),
+            child: const MainBottomNavBar(),
+          ),
+        );
+
+      case Routes.specializations:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                GetAllDoctorsCubit(getIt<DoctorsBusinessInterface>())
+                  ..getAllDoctors(),
+            child: const SpecializationsScreen(),
+          ),
+        );
+
+      case Routes.settings:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                GetAllDoctorsCubit(getIt<DoctorsBusinessInterface>())
+                  ..getAllDoctors(),
+            child: const SettingsScreen(),
+          ),
+        );
+
       default:
         return null;
     }

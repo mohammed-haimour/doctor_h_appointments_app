@@ -33,7 +33,9 @@ class Constants {
   static const Color colorDarkRed = Color.fromRGBO(111, 0, 0, 1.0);
   static const Color colorDoctorHRed = Color.fromRGBO(254, 88, 88, 1);
   static const Color colorDarkBlueDoctorH = Color.fromRGBO(28, 42, 58, 1.0);
-  static const Color colorLightBlueDoctorH = Color.fromRGBO(28, 42, 58, 0.866);
+  static const Color colorBlueDoctorH = Color.fromRGBO(20, 124, 242, 1);
+  static const Color colorLightBlueDoctorH =
+      Color.fromRGBO(73, 130, 196, 0.863);
 
   // - App Margins
   static const EdgeInsets marginSmall = EdgeInsets.all(5);
@@ -41,7 +43,8 @@ class Constants {
   static const EdgeInsets marginLarge = EdgeInsets.all(30);
 
   // - App Paddings
-  static const EdgeInsets paddingForScreen = EdgeInsets.all(12);
+  static const EdgeInsets paddingForScreen =
+      EdgeInsets.only(top: 12, right: 12, left: 12, bottom: 0);
   static const EdgeInsets paddingSmall = EdgeInsets.all(10);
   static const EdgeInsets paddingMedium = EdgeInsets.all(13);
   static const EdgeInsets paddingBiggerThanMedium = EdgeInsets.all(20);
