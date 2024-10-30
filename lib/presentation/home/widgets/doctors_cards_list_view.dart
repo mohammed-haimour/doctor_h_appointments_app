@@ -64,16 +64,8 @@ class DoctorCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      ClipOval(
-                        child: Image.network(
-                          "",
-                          width: 42,
-                          height: 42,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) =>
-                              const Icon(Icons.person,
-                                  size: 42, color: Colors.grey),
-                        ),
+                      const ClipOval(
+                        child: Icon(Icons.person, size: 42, color: Colors.grey),
                       ),
                       CustomSpace.horizontal(space: 10),
                       Column(

@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
               CustomSpace.vertical(),
               const Categories(),
               CustomSpace.vertical(),
-              const FindDoctors()
+              const FindDoctors(),
             ],
           ),
         ),

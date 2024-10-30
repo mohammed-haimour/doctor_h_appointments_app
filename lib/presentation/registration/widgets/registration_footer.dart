@@ -49,7 +49,8 @@ class RegistrationFooter extends StatelessWidget {
                 text: "Create One !",
               )
             ],
-          )
+          ),
+        CustomSpace.vertical()
       ],
     );
   }
