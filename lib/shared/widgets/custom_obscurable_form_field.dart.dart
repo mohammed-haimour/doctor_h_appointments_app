@@ -97,7 +97,7 @@ class _CustomObscurableFormFieldState extends State<CustomObscurableFormField> {
         // hintStyle: hintStyle ?? TextStyles.font14LightGrayRegular,
         hintText: widget.hintText,
         fillColor: widget.backgroundColor ??
-            ((getIt<UserBusinessInterface>().userInformation?.theme ??
+            ((getIt<UserBusinessInterface>().userPreferences?.theme ??
                         ThemeMode.light) ==
                     ThemeMode.light
                 ? Constants.colorWhiteLessSmoke

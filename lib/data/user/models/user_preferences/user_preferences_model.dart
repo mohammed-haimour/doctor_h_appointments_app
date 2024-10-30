@@ -1,47 +1,56 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'user_information_model.g.dart';
+part 'user_preferences_model.g.dart';
 
 @JsonSerializable()
-class UserInformationModel {
+class UserPreferencesModel {
   final String? _email;
   final String? _password;
+  final String? _userName; // New field
   final String? _theme; // "dark" or "light"
 
-  UserInformationModel({
+  UserPreferencesModel({
     String? email,
     String? password,
+    String? userName, // Added parameter
     String? theme,
   })  : _email = email,
         _password = password,
+        _userName = userName, // Initialize userName
         _theme = theme;
 
   // Getters
   String? get email => _email;
   String? get password => _password;
+  String? get userName => _userName; // Added getter
   String? get theme => _theme;
 
   // copyWith method to update the current instance
-  UserInformationModel copyWith({
+  UserPreferencesModel copyWith({
     String? email,
     String? password,
+    String? userName, // Added parameter
     String? theme,
   }) {
-    return UserInformationModel(
+    return UserPreferencesModel(
       email: email ?? _email,
       password: password ?? _password,
+      userName: userName ?? _userName, // Updated copyWith
       theme: theme ?? _theme,
     );
   }
 
   // Auto-generated from JsonSerializable
-  factory UserInformationModel.fromJson(Map<String, dynamic> json) =>
-      _$UserInformationModelFromJson(json);
+  factory UserPreferencesModel.fromJson(Map<String, dynamic> json) =>
+      _$UserPreferencesModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$UserInformationModelToJson(this);
+  Map<String, dynamic> toJson() => _$UserPreferencesModelToJson(this);
 
   // Function to check if all fields are not null
   bool isNotNull() {
-    return _email != null && _password != null && _theme != null;
+    return _email != null &&
+        _password != null &&
+        _userName != null &&
+        _theme != null; // Updated check
   }
 }

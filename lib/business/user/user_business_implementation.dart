@@ -2,13 +2,13 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/create_account/create_account_result_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/login/login_result_entity.dart';
-import 'package:doctor_h_appointments_app/business/user/entities/user_information/user_information_entity.dart';
+import 'package:doctor_h_appointments_app/business/user/entities/user_preferences/user_preferences_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/user_business_interface.dart';
 import 'package:doctor_h_appointments_app/data/user/models/create_account/create_account_payload_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/create_account/create_account_response_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/login/login_payload_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/login/login_reponse_model.dart';
-import 'package:doctor_h_appointments_app/data/user/models/user_information/user_information_model.dart';
+import 'package:doctor_h_appointments_app/data/user/models/user_preferences/user_preferences_model.dart';
 import 'package:doctor_h_appointments_app/data/user/user_data_interface.dart';
 import 'package:doctor_h_appointments_app/shared/di/dependency_injection.dart';
 import 'package:doctor_h_appointments_app/shared/networking/dio_factory.dart';
@@ -21,10 +21,10 @@ class UserBusinessImplementation implements UserBusinessInterface {
   UserBusinessImplementation({required UserDataInterface userDataInterface})
       : _userDataLayer = userDataInterface;
 
-  UserInformationEntity? _userInformation;
+  UserPreferencesEntity? _userPreferences;
 
   @override
-  UserInformationEntity? get userInformation => _userInformation;
+  UserPreferencesEntity? get userPreferences => _userPreferences;
 
   @override
   Future<Either<Failure, LoginResultEntity>> logIn(
@@ -35,13 +35,14 @@ class UserBusinessImplementation implements UserBusinessInterface {
 
       // saving user credintials to local db
       if (responseModel.code == 200) {
-        saveUserInformation(
-            userToSave: _userInformation!.copyWith(
-          email: loginPayload.email,
-          password: loginPayload.password,
-        ));
+        saveUserPreferences(
+            userPreferencesToSave: _userPreferences!.copyWith(
+                email: loginPayload.email,
+                password: loginPayload.password,
+                userName: responseModel.userDataAndToken.username));
         DioFactory.setTokenIntoHeaderAfterLogin(
             responseModel.userDataAndToken.token);
+        await getUserPreferences();
       }
 
       LoginResultEntity loginResponseEntity =
@@ -65,20 +66,19 @@ class UserBusinessImplementation implements UserBusinessInterface {
 
       // saving user credintials to local db
       if (responseModel.code == 200) {
-        saveUserInformation(
-            userToSave: _userInformation!.copyWith(
-          email: createAccountPayload.email,
-          password: createAccountPayload.password,
-        ));
+        saveUserPreferences(
+            userPreferencesToSave: _userPreferences!.copyWith(
+                email: createAccountPayload.email,
+                password: createAccountPayload.password,
+                userName: responseModel.userDataAndToken.username));
         DioFactory.setTokenIntoHeaderAfterLogin(
             responseModel.userDataAndToken.token);
+        await getUserPreferences();
       }
 
       CreateAccountResultEntity createAccountResultEntity =
           CreateAccountResultEntity.fromCreateAccountResponseModel(
               model: responseModel);
-
-      // save user data
 
       return right(createAccountResultEntity);
     } on Exception catch (error) {
@@ -90,18 +90,23 @@ class UserBusinessImplementation implements UserBusinessInterface {
   }
 
   @override
-  Future<Either<Failure, void>> getUserInformation() async {
+  Future<Either<Failure, void>> getUserPreferences() async {
     try {
-      UserInformationModel? model = await _userDataLayer.getUserInformation();
+      UserPreferencesModel? model = await _userDataLayer.getUserPreferences();
+
+      print("${model?.email}");
+      print("${model?.password}");
+      print("${model?.theme}");
+      print("${model?.userName}");
 
       if (model == null) {
         return right(null);
       }
 
-      UserInformationEntity entity =
-          UserInformationEntity.fromUserInformationModel(model: model);
+      UserPreferencesEntity entity =
+          UserPreferencesEntity.fromUserPreferencesModel(model: model);
 
-      _userInformation = entity;
+      _userPreferences = entity;
 
       return right(null);
     } on Exception catch (error) {
@@ -110,22 +115,22 @@ class UserBusinessImplementation implements UserBusinessInterface {
   }
 
   @override
-  Future<Either<Failure, void>> saveUserInformation(
-      {required UserInformationEntity userToSave}) async {
-    if (_userInformation != userToSave) {
+  Future<Either<Failure, void>> saveUserPreferences(
+      {required UserPreferencesEntity userPreferencesToSave}) async {
+    if (_userPreferences != userPreferencesToSave) {
       try {
-        UserInformationModel userInformationModel = UserInformationModel(
-          email: userToSave.email,
-          password: userToSave.password,
-          theme: userToSave.theme == null
-              ? null
-              : userToSave.theme == ThemeMode.light
-                  ? "light"
-                  : "dark",
-        );
+        UserPreferencesModel userPreferencesModel = UserPreferencesModel(
+            email: userPreferencesToSave.email,
+            password: userPreferencesToSave.password,
+            theme: userPreferencesToSave.theme == null
+                ? null
+                : userPreferencesToSave.theme == ThemeMode.light
+                    ? "light"
+                    : "dark",
+            userName: userPreferencesToSave.userName);
 
-        await _userDataLayer.saveUserInformation(
-            userInformation: userInformationModel);
+        await _userDataLayer.saveUserPreferences(
+            userPreferencesToSave: userPreferencesModel);
         return right(null); // what should i do here OH nothing LOL
       } on Exception catch (error) {
         return left(LocalDbFailure(error.toString()));
@@ -137,13 +142,13 @@ class UserBusinessImplementation implements UserBusinessInterface {
 
   @override
   Future<Either<Failure, LoginResultEntity>>
-      logInWithSavedUserInformation() async {
+      logInWithSavedUserCredentials() async {
     try {
       LoginResponseModel responseModel = await _userDataLayer.login(
           loginPayload: LoginPayloadModel(
-              email: getIt<UserBusinessInterface>().userInformation!.email!,
+              email: getIt<UserBusinessInterface>().userPreferences!.email!,
               password:
-                  getIt<UserBusinessInterface>().userInformation!.password!));
+                  getIt<UserBusinessInterface>().userPreferences!.password!));
 
       if (responseModel.code == 200) {
         DioFactory.setTokenIntoHeaderAfterLogin(

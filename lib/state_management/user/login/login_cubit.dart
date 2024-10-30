@@ -68,10 +68,10 @@ class LogInCubit extends Cubit<LoginState> {
     );
   }
 
-  Future<void> logInWithSavedUserInformation() async {
+  Future<void> logInWithSavedUserPreferences() async {
     emit(LoginLoading());
 
-    var result = await _userBusiness.logInWithSavedUserInformation();
+    var result = await _userBusiness.logInWithSavedUserCredentials();
 
     void ifError(Failure failure) =>
         emit(LoginFailure(message: failure.message));

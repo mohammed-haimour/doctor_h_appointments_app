@@ -16,7 +16,7 @@ class CustomTextButtomV2 extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          color: ((getIt<UserBusinessInterface>().userInformation?.theme ??
+          color: ((getIt<UserBusinessInterface>().userPreferences?.theme ??
                       ThemeMode.light) ==
                   ThemeMode.light)
               ? Constants.colorDarkBlueDoctorH

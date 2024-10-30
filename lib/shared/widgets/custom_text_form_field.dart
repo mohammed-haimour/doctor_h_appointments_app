@@ -79,7 +79,7 @@ class CustomTextFormField extends StatelessWidget {
         hintText: hintText,
         suffixIcon: suffixIcon,
         fillColor: backgroundColor ??
-            ((getIt<UserBusinessInterface>().userInformation?.theme ??
+            ((getIt<UserBusinessInterface>().userPreferences?.theme ??
                         ThemeMode.light) ==
                     ThemeMode.light
                 ? Constants.colorWhiteLessSmoke

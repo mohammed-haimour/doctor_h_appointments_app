@@ -1,3 +1,5 @@
+import 'package:doctor_h_appointments_app/business/user/user_business_interface.dart';
+import 'package:doctor_h_appointments_app/shared/di/dependency_injection.dart';
 import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_space.dart';
 import 'package:flutter/material.dart';
@@ -23,26 +25,40 @@ class UserNameAndWelcoming extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const CircleAvatar(
-          backgroundColor: Colors.black,
-          child: Text(
-            "MH",
-            style: TextStyle(color: Colors.white),
+    return Flexible(
+      child: Row(
+        children: [
+          CircleAvatar(
+            backgroundColor: Colors.black,
+            child: Text(
+              (getIt<UserBusinessInterface>()
+                  .userPreferences!
+                  .userName!
+                  .substring(0, 2)
+                  .toUpperCase()),
+              style: const TextStyle(color: Colors.white),
+            ),
           ),
-        ),
-        CustomSpace.horizontal(space: 10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Welcome Back !",
-                style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                    fontWeight: FontWeight.w400, color: Constants.colorGrey)),
-            const Text("Andrew Smith")
-          ],
-        )
-      ],
+          CustomSpace.horizontal(space: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Welcome Back !",
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      fontWeight: FontWeight.w400, color: Constants.colorGrey),
+                ),
+                Text(
+                  getIt<UserBusinessInterface>().userPreferences!.userName!,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

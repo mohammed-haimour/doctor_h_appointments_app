@@ -8,8 +8,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   setUpGetIt(); // i always forgot this shit :)
-  await getIt<UserBusinessInterface>()
-      .getUserInformation();
+  await getIt<UserBusinessInterface>().getUserPreferences();
 
   runApp(DoctorHApp(
     appRouter: AppRouter(),
