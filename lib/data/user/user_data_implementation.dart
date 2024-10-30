@@ -6,6 +6,9 @@ import 'package:doctor_h_appointments_app/data/user/models/create_account/create
 import 'package:doctor_h_appointments_app/data/user/models/create_account/create_account_response_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/login/login_payload_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/login/login_reponse_model.dart';
+import 'package:doctor_h_appointments_app/data/user/models/user_informations/get_user_informations_response_model.dart';
+import 'package:doctor_h_appointments_app/data/user/models/user_informations/update_user_informations_payload_model.dart';
+import 'package:doctor_h_appointments_app/data/user/models/user_informations/update_user_informations_response_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/user_preferences/user_preferences_model.dart';
 import 'package:doctor_h_appointments_app/data/user/user_data_interface.dart';
 
@@ -68,5 +71,31 @@ class UserDataImplementation implements UserDataInterface {
 
     await _localSource.saveUserPreferences(
         userPreferences: userInfomationInString);
+  }
+
+  @override
+  Future<GetUserInformationsResponseModel> getUserInformations() async {
+    // the payload is the token and it's already sent automaitcly by the dioFactory with the headers
+    Map<String, dynamic> response = await _remoteSource.getUserInformations();
+
+    GetUserInformationsResponseModel getReponse =
+        GetUserInformationsResponseModel.fromJson(response);
+
+    return getReponse;
+  }
+
+  @override
+  Future<UpdateUserInformationsResponseModel> updateUserInformations(
+      {required UpdateUserInformationsPayloadModel userToUpdate}) async {
+    // the payload is the token and it's already sent automaitcly by the dioFactory with the headers
+    Map<String, dynamic> payload = userToUpdate.toJson();
+
+    Map<String, dynamic> response =
+        await _remoteSource.updateUserInformations(payload: payload);
+
+    UpdateUserInformationsResponseModel responseInModel =
+        UpdateUserInformationsResponseModel.fromJson(response);
+
+    return responseInModel;
   }
 }
