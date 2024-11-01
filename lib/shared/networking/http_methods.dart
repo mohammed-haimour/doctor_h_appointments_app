@@ -19,7 +19,7 @@ extension HttpMethods on Dio{
     return response.data;
   }
 
-  Future<Map<String , dynamic>> postMethod({required String endPoint , required Map<String,dynamic> payload})
+  Future<Map<String , dynamic>> postMethod({required String endPoint , Map<String,dynamic> ? payload})
   async{
 
     var response = await post(

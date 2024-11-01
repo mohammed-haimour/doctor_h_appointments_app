@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/create_account/create_account_result_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/login/login_result_entity.dart';
+import 'package:doctor_h_appointments_app/business/user/entities/logout/logout_result_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/user_informations/get_user_informations_result_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/user_informations/update_user_informations_result_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/user_preferences/user_preferences_entity.dart';
@@ -10,6 +11,7 @@ import 'package:doctor_h_appointments_app/data/user/models/create_account/create
 import 'package:doctor_h_appointments_app/data/user/models/create_account/create_account_response_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/login/login_payload_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/login/login_reponse_model.dart';
+import 'package:doctor_h_appointments_app/data/user/models/logout/log_out_response.dart';
 import 'package:doctor_h_appointments_app/data/user/models/user_informations/get_user_informations_response_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/user_informations/update_user_informations_payload_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/user_informations/update_user_informations_response_model.dart';
@@ -202,6 +204,23 @@ class UserBusinessImplementation implements UserBusinessInterface {
                   userToConvert: responseInDataModel);
 
       return right(responseInEntity);
+    } on Exception catch (error) {
+      if (error is DioException) {
+        return left(ServerFailure.fromDioError(error));
+      }
+      return left(ServerFailure(error.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, LogOutResultEntity>> logout() async {
+    try {
+      LogoutResponseModel dataModel = await _userDataLayer.logout();
+
+      LogOutResultEntity entity = LogOutResultEntity.fromLogoutResponseModel(
+          logoutReponseModel: dataModel);
+
+      return right(entity);
     } on Exception catch (error) {
       if (error is DioException) {
         return left(ServerFailure.fromDioError(error));

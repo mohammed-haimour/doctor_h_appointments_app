@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/create_account/create_account_result_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/login/login_result_entity.dart';
+import 'package:doctor_h_appointments_app/business/user/entities/logout/logout_result_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/user_informations/get_user_informations_result_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/user_informations/update_user_informations_result_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/user_preferences/user_preferences_entity.dart';
@@ -12,6 +13,8 @@ import 'package:doctor_h_appointments_app/shared/networking/errors/api_error_han
 abstract class UserBusinessInterface {
   Future<Either<Failure, LoginResultEntity>> logIn(
       {required LoginPayloadModel loginPayload});
+
+        Future<Either<Failure, LogOutResultEntity>> logout();
   Future<Either<Failure, LoginResultEntity>> logInWithSavedUserCredentials();
   Future<Either<Failure, CreateAccountResultEntity>> createAccount(
       {required CreateAccountPayloadModel createAccountPayload});
