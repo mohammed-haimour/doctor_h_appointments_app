@@ -103,10 +103,10 @@ class _CustomObscurableFormFieldState extends State<CustomObscurableFormField> {
 
         disabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(
-            color: Constants.colorLightGrey,
-            width: 1.3,
+            color: Color.fromARGB(255, 196, 196, 196),
+            width: 0.5,
           ),
-          borderRadius: BorderRadius.circular(16.0),
+          borderRadius: BorderRadius.circular(12.0),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderSide: const BorderSide(

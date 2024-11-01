@@ -2,7 +2,7 @@ import 'package:doctor_h_appointments_app/shared/extensions/navigation_extenstio
 import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:flutter/material.dart';
 
-void customErrorDialog(BuildContext context ,{required String errorMessage}){
+void customMessageDialog(BuildContext context ,{required String message}){
   showDialog(
     context: context,
     builder: (context) => AlertDialog(
@@ -13,7 +13,7 @@ void customErrorDialog(BuildContext context ,{required String errorMessage}){
         size: 32,
       ),
       content: Text(
-        errorMessage,
+        message,
       ),
       actions: [
         TextButton(

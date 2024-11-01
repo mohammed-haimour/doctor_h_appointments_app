@@ -3,17 +3,27 @@ import 'package:doctor_h_appointments_app/business/user/user_business_interface.
 import 'package:doctor_h_appointments_app/shared/di/dependency_injection.dart';
 import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_button.dart';
+import 'package:doctor_h_appointments_app/shared/widgets/custom_message_dialog.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_obscurable_form_field.dart.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_space.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_text_button_v2.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
-class PersonalDetailsToShowAndUpdate extends StatelessWidget {
+class PersonalDetailsToShowAndUpdate extends StatefulWidget {
   final GetUserInformationsResultEntity userInformations;
 
   const PersonalDetailsToShowAndUpdate(
       {super.key, required this.userInformations});
+
+  @override
+  State<PersonalDetailsToShowAndUpdate> createState() =>
+      _PersonalDetailsToShowAndUpdateState();
+}
+
+class _PersonalDetailsToShowAndUpdateState
+    extends State<PersonalDetailsToShowAndUpdate> {
+  bool isEditable = false;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +42,13 @@ class PersonalDetailsToShowAndUpdate extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text("Your Informations :"),
-            CustomTextButtonV2(text: "Edit", onClick: () {})
+            CustomTextButtonV2(
+                text: (isEditable) ? "Cancel" : "Edit",
+                onClick: () {
+                  setState(() {
+                    isEditable = !isEditable;
+                  });
+                })
           ],
         ),
         CustomSpace.vertical(space: 10),
@@ -41,8 +57,8 @@ class PersonalDetailsToShowAndUpdate extends StatelessWidget {
           hintText: "Name",
           validator: (p0) {},
           showLabel: true,
-          isEnabled: false,
-          intialValue: userInformations.name,
+          isEnabled: isEditable,
+          intialValue: widget.userInformations.name,
         ),
         CustomSpace.vertical(),
         CustomTextFormField(
@@ -50,14 +66,16 @@ class PersonalDetailsToShowAndUpdate extends StatelessWidget {
             hintText: "Phone number",
             validator: (p0) {},
             showLabel: true,
-            intialValue: userInformations.phoneNumber),
+            isEnabled: isEditable,
+            intialValue: widget.userInformations.phoneNumber),
         CustomSpace.vertical(),
         CustomTextFormField(
             prefixIcon: Icons.email,
             hintText: "Email",
             validator: (p0) {},
             showLabel: true,
-            intialValue: userInformations.email),
+            isEnabled: isEditable,
+            intialValue: widget.userInformations.email),
         CustomSpace.vertical(),
         CustomObscurableFormField(
             isAlwaysObsucured: true,
@@ -65,10 +83,20 @@ class PersonalDetailsToShowAndUpdate extends StatelessWidget {
             hintText: "Password",
             validator: (p0) {},
             showLabel: true,
+            isEnabled: isEditable,
             intialValue:
                 getIt<UserBusinessInterface>().userPreferences!.password),
         CustomSpace.vertical(),
-        // CustomButton(text: "Save", onPressed: () {})
+        (isEditable)
+            ? CustomButton(
+                text: "Save",
+                onPressed: () {
+                  // there is a real problem in the end point that handels the update profile request once it's solved i will fix,,, srry
+                  customMessageDialog(context,
+                      message:
+                          "We’re experiencing a temporary issue with the service that updates your profile. Once it’s resolved, we’ll update it here. Thank you for your patience!");
+                })
+            : const SizedBox.shrink()
       ],
     );
   }
