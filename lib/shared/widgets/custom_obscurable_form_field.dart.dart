@@ -13,20 +13,27 @@ class CustomObscurableFormField extends StatefulWidget {
   final String hintText;
   final Color? backgroundColor;
   final TextEditingController? controller;
+  final bool isAlwaysObsucured;
   final Function(String?) validator;
-  const CustomObscurableFormField({
-    super.key,
-    this.contentPadding,
-    this.focusedBorder,
-    required this.prefixIcon,
-    this.enabledBorder,
-    this.inputTextStyle,
-    this.hintStyle,
-    required this.hintText,
-    this.backgroundColor,
-    this.controller,
-    required this.validator,
-  });
+  final bool showLabel;
+  final String? intialValue;
+  final bool isEnabled;
+  const CustomObscurableFormField(
+      {super.key,
+      this.contentPadding,
+      this.focusedBorder,
+      required this.prefixIcon,
+      this.enabledBorder,
+      this.inputTextStyle,
+      this.hintStyle,
+      required this.hintText,
+      this.backgroundColor,
+      this.controller,
+      required this.validator,
+      this.showLabel = false,
+      this.isAlwaysObsucured = false,
+      this.isEnabled = false,
+      this.intialValue});
 
   @override
   State<CustomObscurableFormField> createState() =>
@@ -39,21 +46,27 @@ class _CustomObscurableFormFieldState extends State<CustomObscurableFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: widget.isEnabled,
+      initialValue: widget.intialValue,
       controller: widget.controller,
-      obscureText: isObscure,
+      obscureText: (widget.isAlwaysObsucured == true) ? true : isObscure,
       textAlignVertical: TextAlignVertical.center,
       decoration: InputDecoration(
+        labelStyle: Theme.of(context).textTheme.bodyMedium,
+        labelText: (widget.showLabel == true) ? widget.hintText : null,
         //! Use [suffixIcon] instead of [suffix]
-        suffixIcon: GestureDetector(
-            onTap: () {
-              setState(() {
-                isObscure = !isObscure;
-              });
-            },
-            child: Icon(
-              (isObscure) ? Icons.visibility : Icons.visibility_off,
-              color: Constants.colorGrey,
-            )),
+        suffixIcon: (widget.isAlwaysObsucured == false)
+            ? GestureDetector(
+                onTap: () {
+                  setState(() {
+                    isObscure = !isObscure;
+                  });
+                },
+                child: Icon(
+                  (isObscure) ? Icons.visibility : Icons.visibility_off,
+                  color: Constants.colorGrey,
+                ))
+            : null,
         hintStyle: Theme.of(context)
             .textTheme
             .bodyMedium!
@@ -86,6 +99,14 @@ class _CustomObscurableFormFieldState extends State<CustomObscurableFormField> {
             width: 1.3,
           ),
           borderRadius: BorderRadius.circular(16.0),
+        ),
+
+        disabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: Color.fromARGB(255, 196, 196, 196),
+            width: 0.5,
+          ),
+          borderRadius: BorderRadius.circular(12.0),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderSide: const BorderSide(

@@ -1,4 +1,5 @@
 import 'package:doctor_h_appointments_app/shared/extensions/navigation_extenstions.dart';
+import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:flutter/material.dart';
 
 void customErrorDialog(BuildContext context ,{required String errorMessage}){
@@ -8,7 +9,7 @@ void customErrorDialog(BuildContext context ,{required String errorMessage}){
       title: const Text( "Something Went Wrong"),
       icon: const Icon(
         Icons.error,
-        color: Colors.red,
+        color: Constants.colorDoctorHRed,
         size: 32,
       ),
       content: Text(

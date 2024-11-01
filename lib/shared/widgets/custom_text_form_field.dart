@@ -14,7 +14,10 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final Color? backgroundColor;
   final TextEditingController? controller;
+  final String? intialValue;
+  final bool showLabel;
   final Function(String?) validator;
+  final bool isEnabled;
   const CustomTextFormField({
     super.key,
     this.contentPadding,
@@ -28,13 +31,20 @@ class CustomTextFormField extends StatelessWidget {
     this.backgroundColor,
     this.controller,
     required this.validator,
+    this.showLabel = false,
+    this.intialValue,
+    this.isEnabled = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      initialValue: (intialValue != null) ? intialValue : null,
       controller: controller,
+      enabled: isEnabled,
       decoration: InputDecoration(
+        labelStyle: Theme.of(context).textTheme.bodyMedium,
+        labelText: (showLabel == true) ? hintText : null,
         hintStyle: Theme.of(context)
             .textTheme
             .bodyMedium!
@@ -53,6 +63,14 @@ class CustomTextFormField extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(16.0),
             ),
+
+        disabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: Color.fromARGB(255, 196, 196, 196),
+            width: 0.5,
+          ),
+          borderRadius: BorderRadius.circular(12.0),
+        ),
         enabledBorder: enabledBorder ??
             OutlineInputBorder(
               borderSide: const BorderSide(

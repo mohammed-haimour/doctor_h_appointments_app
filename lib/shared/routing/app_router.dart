@@ -14,15 +14,15 @@ import 'package:doctor_h_appointments_app/shared/routing/routes.dart';
 import 'package:doctor_h_appointments_app/state_management/doctors/get_all_doctors/get_all_doctors_cubit.dart';
 import 'package:doctor_h_appointments_app/state_management/user/create_account/create_account_cubit.dart';
 import 'package:doctor_h_appointments_app/state_management/user/login/login_cubit.dart';
+import 'package:doctor_h_appointments_app/state_management/user/user_informations/get_user_informations/get_user_informations_cubit.dart';
+import 'package:doctor_h_appointments_app/state_management/user/user_informations/update_user_informations/update_user_informations_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AppRouter {
-  Route? generateRoute(RouteSettings settings) {
+abstract class AppRouter {
+  static Route? generateRoute(RouteSettings settings) {
     //this arguments to be passed in any screen like this ( arguments as ClassName )
-    // ignore: unused_local_variable
     final arguments = settings.arguments;
-
     switch (settings.name) {
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
@@ -53,50 +53,36 @@ class AppRouter {
 
       case Routes.doctorsScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) =>
-                GetAllDoctorsCubit(getIt<DoctorsBusinessInterface>())
-                  ..getAllDoctors(),
-            child: const DoctorsScreen(),
-          ),
+          builder: (_) => const DoctorsScreen(),
         );
 
       case Routes.bookAnAppointment:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) =>
-                GetAllDoctorsCubit(getIt<DoctorsBusinessInterface>())
-                  ..getAllDoctors(),
-            child: const BookAnAppointmentScreen(),
-          ),
+          builder: (_) => const BookAnAppointmentScreen(),
         );
 
       case Routes.mainBottomNavBar:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) =>
-                GetAllDoctorsCubit(getIt<DoctorsBusinessInterface>())
-                  ..getAllDoctors(),
-            child: const MainBottomNavBar(),
-          ),
+          builder: (_) => const MainBottomNavBar(),
         );
 
       case Routes.specializations:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) =>
-                GetAllDoctorsCubit(getIt<DoctorsBusinessInterface>())
-                  ..getAllDoctors(),
-            child: const SpecializationsScreen(),
-          ),
+          builder: (_) => const SpecializationsScreen(),
         );
 
       case Routes.settings:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) =>
-                GetAllDoctorsCubit(getIt<DoctorsBusinessInterface>())
-                  ..getAllDoctors(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                  create: (context) =>
+                      GetUserInformationsCubit(getIt<UserBusinessInterface>())
+                        ..getUserInformations()),
+              BlocProvider(
+                  create: (context) => UpdateUserInformationsCubit(
+                      getIt<UserBusinessInterface>())),
+            ],
             child: const SettingsScreen(),
           ),
         );

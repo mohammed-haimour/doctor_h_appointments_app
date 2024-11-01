@@ -9,10 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DoctorHApp extends StatelessWidget {
-  final AppRouter appRouter;
   const DoctorHApp({
     super.key,
-    required this.appRouter,
   });
 
   @override
@@ -37,10 +35,11 @@ class DoctorHApp extends StatelessWidget {
                         ? Routes.createAccountScreen
                         : Routes.logInScreen,
             title: 'Doctor H App',
-            onGenerateRoute: appRouter.generateRoute,
+            onGenerateRoute: AppRouter.generateRoute,
           );
         },
       ),
     );
   }
 }
+

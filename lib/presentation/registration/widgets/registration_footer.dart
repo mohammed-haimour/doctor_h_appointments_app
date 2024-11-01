@@ -4,7 +4,7 @@ import 'package:doctor_h_appointments_app/shared/routing/routes.dart';
 import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_divider_with_text_in_center.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_space.dart';
-import 'package:doctor_h_appointments_app/shared/widgets/custom_text_buttom_v2.dart';
+import 'package:doctor_h_appointments_app/shared/widgets/custom_text_button_v2.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationFooter extends StatelessWidget {
@@ -13,45 +13,46 @@ class RegistrationFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const CustomDividerWithTextInCenter(textInCenter: "or"),
-        CustomSpace.vertical(),
-        if (registrationType == RegistrationTypeEnum.createAccount)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Do you have an account ?",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(color: Constants.colorDarkGrey)),
-              CustomTextButtomV2(
+    return SafeArea(
+      child: Column(
+        children: [
+          const CustomDividerWithTextInCenter(textInCenter: "or"),
+          CustomSpace.vertical(),
+          if (registrationType == RegistrationTypeEnum.createAccount)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Do you have an account ?",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(color: Constants.colorDarkGrey)),
+                CustomTextButtonV2(
+                    onClick: () {
+                      context.pushReplacementNamed(Routes.logInScreen);
+                    },
+                    text: "Log In")
+              ],
+            )
+          else
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("If You Don't Have An Account ",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(color: Constants.colorDarkGrey)),
+                CustomTextButtonV2(
                   onClick: () {
-                    context.pushReplacementNamed(Routes.logInScreen);
+                    context.pushReplacementNamed(Routes.createAccountScreen);
                   },
-                  text: "Log In")
-            ],
-          )
-        else
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("If You Don't Have An Account ",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(color: Constants.colorDarkGrey)),
-              CustomTextButtomV2(
-                onClick: () {
-                  context.pushReplacementNamed(Routes.createAccountScreen);
-                },
-                text: "Create One !",
-              )
-            ],
-          ),
-        CustomSpace.vertical()
-      ],
+                  text: "Create One !",
+                )
+              ],
+            ),
+        ],
+      ),
     );
   }
 }

@@ -11,5 +11,6 @@ class BookAnAppointmentScreen extends StatelessWidget {
           child: Center(
         child: Text("Appointment"),
       )),
-    );  }
+    );
+  }
 }

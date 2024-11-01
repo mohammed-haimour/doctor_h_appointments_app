@@ -2,19 +2,30 @@ import 'package:dio/dio.dart';
 import 'package:doctor_h_appointments_app/shared/networking/api_contants.dart';
 import 'package:doctor_h_appointments_app/shared/networking/http_methods.dart';
 
-class UserDataRemoteSource{
-
+class UserDataRemoteSource {
   final Dio _httpClient;
   UserDataRemoteSource({required Dio httpClient}) : _httpClient = httpClient;
 
-  Future<Map<String , dynamic>> logIn({required Map<String , dynamic> payload})
-  async{
-    return await _httpClient.postMethod(endPoint: ApiConstants.logIn , payload: payload);
+  Future<Map<String, dynamic>> logIn(
+      {required Map<String, dynamic> payload}) async {
+    return await _httpClient.postMethod(
+        endPoint: ApiConstants.logIn, payload: payload);
   }
 
-  Future<Map<String , dynamic>> createAccount({required Map<String , dynamic> payload})
-  async{
-    return await _httpClient.postMethod(endPoint: ApiConstants.createAccount , payload: payload);
+  Future<Map<String, dynamic>> createAccount(
+      {required Map<String, dynamic> payload}) async {
+    return await _httpClient.postMethod(
+        endPoint: ApiConstants.createAccount, payload: payload);
   }
 
+  Future<Map<String, dynamic>> getUserInformations() async {
+    return await _httpClient.getMethod(
+        endPoint: ApiConstants.getUserInformations);
+  }
+
+  Future<Map<String, dynamic>> updateUserInformations(
+      {required Map<String, dynamic> payload}) async {
+    return await _httpClient.postMethod(
+        endPoint: ApiConstants.updateUserInformations, payload: payload);
+  }
 }

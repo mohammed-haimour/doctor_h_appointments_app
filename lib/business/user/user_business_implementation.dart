@@ -2,12 +2,17 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/create_account/create_account_result_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/login/login_result_entity.dart';
+import 'package:doctor_h_appointments_app/business/user/entities/user_informations/get_user_informations_result_entity.dart';
+import 'package:doctor_h_appointments_app/business/user/entities/user_informations/update_user_informations_result_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/user_preferences/user_preferences_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/user_business_interface.dart';
 import 'package:doctor_h_appointments_app/data/user/models/create_account/create_account_payload_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/create_account/create_account_response_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/login/login_payload_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/login/login_reponse_model.dart';
+import 'package:doctor_h_appointments_app/data/user/models/user_informations/get_user_informations_response_model.dart';
+import 'package:doctor_h_appointments_app/data/user/models/user_informations/update_user_informations_payload_model.dart';
+import 'package:doctor_h_appointments_app/data/user/models/user_informations/update_user_informations_response_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/user_preferences/user_preferences_model.dart';
 import 'package:doctor_h_appointments_app/data/user/user_data_interface.dart';
 import 'package:doctor_h_appointments_app/shared/di/dependency_injection.dart';
@@ -94,11 +99,6 @@ class UserBusinessImplementation implements UserBusinessInterface {
     try {
       UserPreferencesModel? model = await _userDataLayer.getUserPreferences();
 
-      print("${model?.email}");
-      print("${model?.password}");
-      print("${model?.theme}");
-      print("${model?.userName}");
-
       if (model == null) {
         return right(null);
       }
@@ -158,6 +158,50 @@ class UserBusinessImplementation implements UserBusinessInterface {
           LoginResultEntity.fromLoginResponseModel(model: responseModel);
 
       return right(loginResponseEntity);
+    } on Exception catch (error) {
+      if (error is DioException) {
+        return left(ServerFailure.fromDioError(error));
+      }
+      return left(ServerFailure(error.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, GetUserInformationsResultEntity>>
+      getUserInformations() async {
+    try {
+      GetUserInformationsResponseModel userInDataModel =
+          await _userDataLayer.getUserInformations();
+
+      GetUserInformationsResultEntity userInEntity =
+          GetUserInformationsResultEntity
+              .fromGetUserInformationsResponseModelToEntity(
+                  userToConvert: userInDataModel);
+
+      return right(userInEntity);
+    } on Exception catch (error) {
+      if (error is DioException) {
+        return left(ServerFailure.fromDioError(error));
+      }
+      return left(ServerFailure(error.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UpdateUserInformationsResultEntity>>
+      updateUserInfornations(
+          {required UpdateUserInformationsPayloadModel userToUpdate}) async {
+    try {
+      UpdateUserInformationsResponseModel responseInDataModel =
+          await _userDataLayer.updateUserInformations(
+              userToUpdate: userToUpdate);
+
+      UpdateUserInformationsResultEntity responseInEntity =
+          UpdateUserInformationsResultEntity
+              .fromUpdateUserInformationsResponseModelToEntity(
+                  userToConvert: responseInDataModel);
+
+      return right(responseInEntity);
     } on Exception catch (error) {
       if (error is DioException) {
         return left(ServerFailure.fromDioError(error));
