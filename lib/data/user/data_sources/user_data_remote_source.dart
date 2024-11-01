@@ -28,4 +28,9 @@ class UserDataRemoteSource {
     return await _httpClient.postMethod(
         endPoint: ApiConstants.updateUserInformations, payload: payload);
   }
+
+    Future<Map<String, dynamic>> logOut() async {
+    return await _httpClient.postMethod(
+        endPoint: ApiConstants.logOut);
+  }
 }

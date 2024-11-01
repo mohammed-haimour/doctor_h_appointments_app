@@ -12,6 +12,8 @@ import 'package:doctor_h_appointments_app/shared/networking/errors/api_error_han
 abstract class UserBusinessInterface {
   Future<Either<Failure, LoginResultEntity>> logIn(
       {required LoginPayloadModel loginPayload});
+
+        Future<Either<Failure, void>> logout();
   Future<Either<Failure, LoginResultEntity>> logInWithSavedUserCredentials();
   Future<Either<Failure, CreateAccountResultEntity>> createAccount(
       {required CreateAccountPayloadModel createAccountPayload});

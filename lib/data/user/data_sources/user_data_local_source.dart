@@ -15,4 +15,8 @@ class UserDataLocalSource {
   Future<String?> getUserPreferences() async {
     return await _storage.read(key: LocalConstants.userPreferencesStorageKey);
   }
+
+  Future<void> deleteAllUserPreferences() async {
+    return await _storage.deleteAll();
+  }
 }

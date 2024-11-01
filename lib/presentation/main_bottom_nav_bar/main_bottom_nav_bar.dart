@@ -19,68 +19,67 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
       PersistentTabController(initialIndex: 0);
 
   final List<Widget> _buildScreens = [
-      Navigator(
-        key: GlobalKey<NavigatorState>(),
-        initialRoute: Routes.homeScreen,
-        onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
-      ),
-      Navigator(
-        key: GlobalKey<NavigatorState>(),
-        initialRoute: Routes.doctorsScreen,
-        onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
-      ),
-      Navigator(
-        key: GlobalKey<NavigatorState>(),
-        initialRoute: Routes.bookAnAppointment,
-        onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
-      ),
-      Navigator(
-        key: GlobalKey<NavigatorState>(),
-        initialRoute: Routes.specializations,
-        onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
-      ),
-      Navigator(
-        key: GlobalKey<NavigatorState>(),
-        initialRoute: Routes.settings,
-        onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
-      ),
-    ];
-
+    Navigator(
+      key: GlobalKey<NavigatorState>(),
+      initialRoute: Routes.homeScreen,
+      onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
+    ),
+    Navigator(
+      key: GlobalKey<NavigatorState>(),
+      initialRoute: Routes.doctorsScreen,
+      onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
+    ),
+    Navigator(
+      key: GlobalKey<NavigatorState>(),
+      initialRoute: Routes.bookAnAppointment,
+      onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
+    ),
+    Navigator(
+      key: GlobalKey<NavigatorState>(),
+      initialRoute: Routes.specializations,
+      onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
+    ),
+    Navigator(
+      key: GlobalKey<NavigatorState>(),
+      initialRoute: Routes.settings,
+      onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
+    ),
+  ];
 
   final List<PersistentBottomNavBarItem> _navBarsItems = [
-      PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.home),
-        title: "Home",
-        activeColorPrimary: Constants.colorDarkBlueDoctorH,
-        inactiveColorPrimary: Constants.colorGrey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(Icons.people),
-        title: "Doctors",
-        activeColorPrimary: Constants.colorDarkBlueDoctorH,
-        inactiveColorPrimary: Constants.colorGrey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(Icons.add),
-        title: "Book",
-        activeColorPrimary: Constants.colorDarkBlueDoctorH,
-        activeColorSecondary: Constants.colorWhite,
-        iconSize: 30,
-        inactiveColorPrimary: Constants.colorDarkBlueDoctorH,
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(Icons.style),
-        title: "Specialization",
-        activeColorPrimary: Constants.colorDarkBlueDoctorH,
-        inactiveColorPrimary: Constants.colorGrey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.settings),
-        title: "Settings",
-        activeColorPrimary: Constants.colorDarkBlueDoctorH,
-        inactiveColorPrimary: Constants.colorGrey,
-      ),
-    ];
+    PersistentBottomNavBarItem(
+      icon: const Icon(CupertinoIcons.home),
+      title: "Home",
+      activeColorPrimary: Constants.colorDarkBlueDoctorH,
+      inactiveColorPrimary: Constants.colorGrey,
+    ),
+    PersistentBottomNavBarItem(
+      icon: const Icon(Icons.people),
+      title: "Doctors",
+      activeColorPrimary: Constants.colorDarkBlueDoctorH,
+      inactiveColorPrimary: Constants.colorGrey,
+    ),
+    PersistentBottomNavBarItem(
+      icon: const Icon(Icons.add),
+      title: "Book",
+      activeColorPrimary: Constants.colorDarkBlueDoctorH,
+      activeColorSecondary: Constants.colorWhite,
+      iconSize: 30,
+      inactiveColorPrimary: Constants.colorDarkBlueDoctorH,
+    ),
+    PersistentBottomNavBarItem(
+      icon: const Icon(Icons.style),
+      title: "Specialization",
+      activeColorPrimary: Constants.colorDarkBlueDoctorH,
+      inactiveColorPrimary: Constants.colorGrey,
+    ),
+    PersistentBottomNavBarItem(
+      icon: const Icon(CupertinoIcons.settings),
+      title: "Settings",
+      activeColorPrimary: Constants.colorDarkBlueDoctorH,
+      inactiveColorPrimary: Constants.colorGrey,
+    ),
+  ];
 
   @override
   void dispose() {
@@ -99,7 +98,7 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
       resizeToAvoidBottomInset: true,
       stateManagement: true,
       hideNavigationBarWhenKeyboardAppears: true,
-      popBehaviorOnSelectedNavBarItemPress: PopBehavior.all,
+      popBehaviorOnSelectedNavBarItemPress: PopBehavior.none,
       padding: const EdgeInsets.only(top: 8),
       backgroundColor: (getIt<UserBusinessInterface>().userPreferences!.theme ==
               ThemeMode.light)

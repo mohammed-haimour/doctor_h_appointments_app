@@ -10,6 +10,7 @@ import 'package:doctor_h_appointments_app/data/user/models/create_account/create
 import 'package:doctor_h_appointments_app/data/user/models/create_account/create_account_response_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/login/login_payload_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/login/login_reponse_model.dart';
+import 'package:doctor_h_appointments_app/data/user/models/logout/log_out_response.dart';
 import 'package:doctor_h_appointments_app/data/user/models/user_informations/get_user_informations_response_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/user_informations/update_user_informations_payload_model.dart';
 import 'package:doctor_h_appointments_app/data/user/models/user_informations/update_user_informations_response_model.dart';
@@ -202,6 +203,32 @@ class UserBusinessImplementation implements UserBusinessInterface {
                   userToConvert: responseInDataModel);
 
       return right(responseInEntity);
+    } on Exception catch (error) {
+      if (error is DioException) {
+        return left(ServerFailure.fromDioError(error));
+      }
+      return left(ServerFailure(error.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> logout() async {
+    try {
+      LogoutResponseModel dataModel = await _userDataLayer.logout();
+
+      ///// canceld
+      // LogOutResultEntity entity = LogOutResultEntity.fromLogoutResponseModel(
+      //     logoutReponseModel: dataModel);
+
+      // removeing the data in the secured storage so no longer the user
+      // can get in the app automaticly
+      // without the email and password
+      await _userDataLayer.deleteAllUserPreferences();
+
+      /// sitting [_userPreferences] to null ,, so no..
+      _userPreferences = null;
+
+      return right(null);
     } on Exception catch (error) {
       if (error is DioException) {
         return left(ServerFailure.fromDioError(error));

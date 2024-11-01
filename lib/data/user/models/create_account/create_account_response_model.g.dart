@@ -16,7 +16,6 @@ CreateAccountResponseModel _$CreateAccountResponseModelFromJson(
       code: (json['code'] as num).toInt(),
     );
 
-// ignore: unused_element
 Map<String, dynamic> _$CreateAccountResponseModelToJson(
         CreateAccountResponseModel instance) =>
     <String, dynamic>{
@@ -33,7 +32,6 @@ CreateAccountResponseDataModel _$CreateAccountResponseDataModelFromJson(
       username: json['username'] as String,
     );
 
-// ignore: unused_element
 Map<String, dynamic> _$CreateAccountResponseDataModelToJson(
         CreateAccountResponseDataModel instance) =>
     <String, dynamic>{
