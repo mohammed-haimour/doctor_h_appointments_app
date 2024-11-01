@@ -1,10 +1,7 @@
 import 'package:doctor_h_appointments_app/business/user/user_business_interface.dart';
-import 'package:doctor_h_appointments_app/presentation/book_an_appointment/book_an_appointment_screen.dart';
-import 'package:doctor_h_appointments_app/presentation/doctors/doctors_screen.dart';
-import 'package:doctor_h_appointments_app/presentation/home/home_screen.dart';
-import 'package:doctor_h_appointments_app/presentation/settings/settings_screen.dart';
-import 'package:doctor_h_appointments_app/presentation/specializations/specializations_screen.dart';
 import 'package:doctor_h_appointments_app/shared/di/dependency_injection.dart';
+import 'package:doctor_h_appointments_app/shared/routing/app_router.dart';
+import 'package:doctor_h_appointments_app/shared/routing/routes.dart';
 import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,33 +18,51 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
   final PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
 
-  List<Widget> _buildScreens() {
-    return [
-      const HomeScreen(),
-      const DoctorsScreen(),
-      const BookAnAppointmentScreen(),
-      const SpecializationsScreen(),
-      const SettingsScreen()
+  final List<Widget> _buildScreens = [
+      Navigator(
+        key: GlobalKey<NavigatorState>(),
+        initialRoute: Routes.homeScreen,
+        onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
+      ),
+      Navigator(
+        key: GlobalKey<NavigatorState>(),
+        initialRoute: Routes.doctorsScreen,
+        onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
+      ),
+      Navigator(
+        key: GlobalKey<NavigatorState>(),
+        initialRoute: Routes.bookAnAppointment,
+        onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
+      ),
+      Navigator(
+        key: GlobalKey<NavigatorState>(),
+        initialRoute: Routes.specializations,
+        onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
+      ),
+      Navigator(
+        key: GlobalKey<NavigatorState>(),
+        initialRoute: Routes.settings,
+        onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
+      ),
     ];
-  }
 
-  List<PersistentBottomNavBarItem> _navBarsItems() {
-    return [
+
+  final List<PersistentBottomNavBarItem> _navBarsItems = [
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.home),
-        title: ("Home"),
+        title: "Home",
         activeColorPrimary: Constants.colorDarkBlueDoctorH,
         inactiveColorPrimary: Constants.colorGrey,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.people),
-        title: ("Doctors"),
+        title: "Doctors",
         activeColorPrimary: Constants.colorDarkBlueDoctorH,
         inactiveColorPrimary: Constants.colorGrey,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.add),
-        title: ("Book"),
+        title: "Book",
         activeColorPrimary: Constants.colorDarkBlueDoctorH,
         activeColorSecondary: Constants.colorWhite,
         iconSize: 30,
@@ -55,18 +70,17 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.style),
-        title: ("Specialization"),
+        title: "Specialization",
         activeColorPrimary: Constants.colorDarkBlueDoctorH,
         inactiveColorPrimary: Constants.colorGrey,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.settings),
-        title: ("Settings"),
+        title: "Settings",
         activeColorPrimary: Constants.colorDarkBlueDoctorH,
         inactiveColorPrimary: Constants.colorGrey,
       ),
     ];
-  }
 
   @override
   void dispose() {
@@ -79,12 +93,11 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
     return PersistentTabView(
       context,
       controller: _controller,
-      screens: _buildScreens(),
-      items: _navBarsItems(),
-      handleAndroidBackButtonPress: true, // Default is true.
-      resizeToAvoidBottomInset:
-          true, // This needs to be true if you want to move up the screen on a non-scrollable screen when keyboard appears. Default is true.
-      stateManagement: true, // Default is true.
+      screens: _buildScreens,
+      items: _navBarsItems,
+      handleAndroidBackButtonPress: true,
+      resizeToAvoidBottomInset: true,
+      stateManagement: true,
       hideNavigationBarWhenKeyboardAppears: true,
       popBehaviorOnSelectedNavBarItemPress: PopBehavior.all,
       padding: const EdgeInsets.only(top: 8),
@@ -95,12 +108,10 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
       isVisible: true,
       animationSettings: const NavBarAnimationSettings(
         navBarItemAnimation: ItemAnimationSettings(
-          // Navigation Bar's items animation properties.
-          duration: Duration(milliseconds: 400),
-          curve: Curves.ease,
+          duration: Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
         ),
         screenTransitionAnimation: ScreenTransitionAnimationSettings(
-          // Screen transition animation on change of selected tab.
           animateTabTransition: true,
           duration: Duration(milliseconds: 200),
           screenTransitionAnimationType: ScreenTransitionAnimationType.fadeIn,
@@ -108,8 +119,7 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
       ),
       confineToSafeArea: true,
       navBarHeight: kBottomNavigationBarHeight,
-      navBarStyle:
-          NavBarStyle.style15, // Choose the nav bar style with this property
+      navBarStyle: NavBarStyle.style15,
     );
   }
 }

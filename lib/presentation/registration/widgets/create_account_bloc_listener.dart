@@ -45,7 +45,7 @@ class _CreateAccountBlocListenerState extends State<CreateAccountBlocListener> {
         if(state is CreateAccountSuccess){
           // to pop the loading dialog :)
           context.pop();
-          context.pushReplacementNamed(Routes.homeScreen);
+          context.pushReplacementNamed(Routes.mainBottomNavBar);
         }else if(state is CreateAccountFailure){
           context.pop();
           customErrorDialog(context, errorMessage: state.message);

@@ -4,7 +4,7 @@ import 'package:doctor_h_appointments_app/shared/routing/routes.dart';
 import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_button.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_space.dart';
-import 'package:doctor_h_appointments_app/shared/widgets/custom_text_buttom_v2.dart';
+import 'package:doctor_h_appointments_app/shared/widgets/custom_text_button_v2.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -48,13 +48,12 @@ class _PagesControllerState extends State<PagesController> {
               activeDotColor: Constants.colorDarkBlueDoctorH,
             ),
             onDotClicked: null),
-        const Spacer(),
-        CustomTextButtomV2(
+        CustomSpace.vertical(),
+        CustomTextButtonV2(
             text: "Skip",
             onClick: () {
               context.pushReplacementNamed(Routes.createAccountScreen);
             }),
-        const Spacer(),
       ],
     );
   }

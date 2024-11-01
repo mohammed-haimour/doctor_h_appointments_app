@@ -1,5 +1,6 @@
 import 'package:doctor_h_appointments_app/presentation/home/widgets/doctors_cards_list_view.dart';
 import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
+import 'package:doctor_h_appointments_app/shared/widgets/custom_error_widget.dart';
 import 'package:doctor_h_appointments_app/state_management/doctors/get_all_doctors/get_all_doctors_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,30 +17,7 @@ class FindDoctorsBlocBuilder extends StatelessWidget {
           return DoctorsCardsListViewBuilder(
               doctors: state.getAllDoctorsReponseModel.data);
         } else if (state is GetAllDoctorsFailure) {
-          return Container(
-            padding: Constants.paddingBiggerThanMedium,
-            height: 200,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: Constants.radiusLarge,
-              color: Constants.colorDoctorHRed,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                const Icon(Icons.error_outline, size: 50),
-                Expanded(
-                  child: Text(
-                    state.message,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                )
-              ],
-            ),
-          );
+          return CustomErrorWidget(errorMessage: state.message);
         } else if (state is GetAllDoctorsLoading) {
           return Shimmer.fromColors(
             baseColor: Colors.grey[300]!,

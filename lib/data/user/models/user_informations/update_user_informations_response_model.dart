@@ -5,6 +5,7 @@ part 'update_user_informations_response_model.g.dart';
 @JsonSerializable()
 class UpdateUserInformationsResponseModel {
   final String message;
+  @JsonKey(name: "data")
   final UserInformations informations;
   final bool status;
   final int code;

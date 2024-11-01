@@ -5,6 +5,7 @@ part 'get_user_informations_response_model.g.dart';
 @JsonSerializable()
 class GetUserInformationsResponseModel {
   final String message;
+  @JsonKey(name: "data")
   final List<UserInformationsForGet> informations;
   final bool status;
   final int code;

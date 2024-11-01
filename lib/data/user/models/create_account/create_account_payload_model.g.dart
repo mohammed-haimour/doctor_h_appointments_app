@@ -6,6 +6,7 @@ part of 'create_account_payload_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+// ignore: unused_element
 CreateAccountPayloadModel _$CreateAccountPayloadModelFromJson(
         Map<String, dynamic> json) =>
     CreateAccountPayloadModel(

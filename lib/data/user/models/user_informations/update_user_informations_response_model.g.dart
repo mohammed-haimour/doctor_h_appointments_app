@@ -10,8 +10,8 @@ UpdateUserInformationsResponseModel
     _$UpdateUserInformationsResponseModelFromJson(Map<String, dynamic> json) =>
         UpdateUserInformationsResponseModel(
           message: json['message'] as String,
-          informations: UserInformations.fromJson(
-              json['informations'] as Map<String, dynamic>),
+          informations:
+              UserInformations.fromJson(json['data'] as Map<String, dynamic>),
           status: json['status'] as bool,
           code: (json['code'] as num).toInt(),
         );
@@ -20,7 +20,7 @@ Map<String, dynamic> _$UpdateUserInformationsResponseModelToJson(
         UpdateUserInformationsResponseModel instance) =>
     <String, dynamic>{
       'message': instance.message,
-      'informations': instance.informations,
+      'data': instance.informations,
       'status': instance.status,
       'code': instance.code,
     };

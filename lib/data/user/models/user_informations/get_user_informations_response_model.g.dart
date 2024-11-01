@@ -10,7 +10,7 @@ GetUserInformationsResponseModel _$GetUserInformationsResponseModelFromJson(
         Map<String, dynamic> json) =>
     GetUserInformationsResponseModel(
       message: json['message'] as String,
-      informations: (json['informations'] as List<dynamic>)
+      informations: (json['data'] as List<dynamic>)
           .map(
               (e) => UserInformationsForGet.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -22,7 +22,7 @@ Map<String, dynamic> _$GetUserInformationsResponseModelToJson(
         GetUserInformationsResponseModel instance) =>
     <String, dynamic>{
       'message': instance.message,
-      'informations': instance.informations,
+      'data': instance.informations,
       'status': instance.status,
       'code': instance.code,
     };

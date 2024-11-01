@@ -3,10 +3,10 @@ import 'package:doctor_h_appointments_app/shared/di/dependency_injection.dart';
 import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:flutter/material.dart';
 
-class CustomTextButtomV2 extends StatelessWidget {
+class CustomTextButtonV2 extends StatelessWidget {
   final String text;
   final void Function() onClick;
-  const CustomTextButtomV2(
+  const CustomTextButtonV2(
       {super.key, required this.text, required this.onClick});
 
   @override

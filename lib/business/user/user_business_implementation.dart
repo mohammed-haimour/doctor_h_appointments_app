@@ -99,11 +99,6 @@ class UserBusinessImplementation implements UserBusinessInterface {
     try {
       UserPreferencesModel? model = await _userDataLayer.getUserPreferences();
 
-      print("${model?.email}");
-      print("${model?.password}");
-      print("${model?.theme}");
-      print("${model?.userName}");
-
       if (model == null) {
         return right(null);
       }
