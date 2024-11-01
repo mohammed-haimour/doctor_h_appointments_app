@@ -33,6 +33,8 @@ class Constants {
   static const Color colorDarkRed = Color.fromRGBO(111, 0, 0, 1.0);
   static const Color colorDoctorHRed = Color.fromRGBO(254, 88, 88, 1);
   static const Color colorDarkBlueDoctorH = Color.fromRGBO(28, 42, 58, 1.0);
+  static const Color colorTransparentDarkBlueDoctorH =
+      Color.fromRGBO(28, 42, 58, 0.319);
   static const Color colorBlueDoctorH = Color.fromRGBO(20, 124, 242, 1);
   static const Color colorLightBlueDoctorH =
       Color.fromRGBO(73, 130, 196, 0.863);

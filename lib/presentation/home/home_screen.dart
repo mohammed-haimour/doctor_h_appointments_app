@@ -2,6 +2,7 @@ import 'package:doctor_h_appointments_app/presentation/home/widgets/categories.d
 import 'package:doctor_h_appointments_app/presentation/home/widgets/find_doctors.dart';
 import 'package:doctor_h_appointments_app/presentation/home/widgets/home_top_bar.dart';
 import 'package:doctor_h_appointments_app/presentation/home/widgets/poster.dart';
+import 'package:doctor_h_appointments_app/presentation/home/widgets/services.dart';
 import 'package:doctor_h_appointments_app/shared/local/secure_storage_factory.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_button.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_screen_wrapper.dart';
@@ -23,15 +24,12 @@ class HomeScreen extends StatelessWidget {
               const HomeTopBar(),
               CustomSpace.vertical(space: 20),
               const Poster(),
-              CustomButton(
-                  text: "delete akk",
-                  onPressed: () async {
-                    await SecureStorageFactory.getStorage().deleteAll();
-                  }),
               CustomSpace.vertical(),
               const Categories(),
               CustomSpace.vertical(),
               const FindDoctors(),
+              CustomSpace.vertical(),
+              const Services()
             ],
           ),
         ),
