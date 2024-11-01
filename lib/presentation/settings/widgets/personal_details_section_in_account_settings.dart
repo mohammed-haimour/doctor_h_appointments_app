@@ -1,7 +1,6 @@
 import 'package:doctor_h_appointments_app/business/user/entities/user_informations/get_user_informations_result_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/user_business_interface.dart';
 import 'package:doctor_h_appointments_app/shared/di/dependency_injection.dart';
-import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_button.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_message_dialog.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_obscurable_form_field.dart.dart';
@@ -10,19 +9,19 @@ import 'package:doctor_h_appointments_app/shared/widgets/custom_text_button_v2.d
 import 'package:doctor_h_appointments_app/shared/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
-class PersonalDetailsToShowAndUpdate extends StatefulWidget {
+class PersonalDetailsSectionInAccountSettings extends StatefulWidget {
   final GetUserInformationsResultEntity userInformations;
 
-  const PersonalDetailsToShowAndUpdate(
+  const PersonalDetailsSectionInAccountSettings(
       {super.key, required this.userInformations});
 
   @override
-  State<PersonalDetailsToShowAndUpdate> createState() =>
-      _PersonalDetailsToShowAndUpdateState();
+  State<PersonalDetailsSectionInAccountSettings> createState() =>
+      _PersonalDetailsSectionInAccountSettingsState();
 }
 
-class _PersonalDetailsToShowAndUpdateState
-    extends State<PersonalDetailsToShowAndUpdate> {
+class _PersonalDetailsSectionInAccountSettingsState
+    extends State<PersonalDetailsSectionInAccountSettings> {
   bool isEditable = false;
 
   @override
@@ -30,14 +29,6 @@ class _PersonalDetailsToShowAndUpdateState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("Sign Out :"),
-        CustomSpace.vertical(space: 10),
-        CustomButton(
-          text: "Sign Out !",
-          onPressed: () {},
-          backGroundColor: Constants.colorDoctorHRed,
-        ),
-        CustomSpace.vertical(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

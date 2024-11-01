@@ -14,6 +14,7 @@ import 'package:doctor_h_appointments_app/shared/routing/routes.dart';
 import 'package:doctor_h_appointments_app/state_management/doctors/get_all_doctors/get_all_doctors_cubit.dart';
 import 'package:doctor_h_appointments_app/state_management/user/create_account/create_account_cubit.dart';
 import 'package:doctor_h_appointments_app/state_management/user/login/login_cubit.dart';
+import 'package:doctor_h_appointments_app/state_management/user/logout/logout_cubit.dart';
 import 'package:doctor_h_appointments_app/state_management/user/user_informations/get_user_informations/get_user_informations_cubit.dart';
 import 'package:doctor_h_appointments_app/state_management/user/user_informations/update_user_informations/update_user_informations_cubit.dart';
 import 'package:flutter/material.dart';
@@ -82,6 +83,9 @@ abstract class AppRouter {
               BlocProvider(
                   create: (context) => UpdateUserInformationsCubit(
                       getIt<UserBusinessInterface>())),
+              BlocProvider(
+                  create: (context) =>
+                      LogoutCubit(getIt<UserBusinessInterface>())),
             ],
             child: const SettingsScreen(),
           ),

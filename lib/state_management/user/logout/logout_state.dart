@@ -13,7 +13,5 @@ class LogoutFailure extends LogoutState {
 }
 
 class LogoutSuccess extends LogoutState {
-  final String message;
 
-  LogoutSuccess({required this.message});
 }

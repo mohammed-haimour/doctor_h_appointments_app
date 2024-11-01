@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/create_account/create_account_result_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/login/login_result_entity.dart';
-import 'package:doctor_h_appointments_app/business/user/entities/logout/logout_result_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/user_informations/get_user_informations_result_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/user_informations/update_user_informations_result_entity.dart';
 import 'package:doctor_h_appointments_app/business/user/entities/user_preferences/user_preferences_entity.dart';
@@ -213,14 +212,23 @@ class UserBusinessImplementation implements UserBusinessInterface {
   }
 
   @override
-  Future<Either<Failure, LogOutResultEntity>> logout() async {
+  Future<Either<Failure, void>> logout() async {
     try {
       LogoutResponseModel dataModel = await _userDataLayer.logout();
 
-      LogOutResultEntity entity = LogOutResultEntity.fromLogoutResponseModel(
-          logoutReponseModel: dataModel);
+      ///// canceld
+      // LogOutResultEntity entity = LogOutResultEntity.fromLogoutResponseModel(
+      //     logoutReponseModel: dataModel);
 
-      return right(entity);
+      // removeing the data in the secured storage so no longer the user
+      // can get in the app automaticly
+      // without the email and password
+
+      await saveUserPreferences(
+          userPreferencesToSave:
+              userPreferences!.copyWith(email: null, password: null));
+
+      return right(null);
     } on Exception catch (error) {
       if (error is DioException) {
         return left(ServerFailure.fromDioError(error));
