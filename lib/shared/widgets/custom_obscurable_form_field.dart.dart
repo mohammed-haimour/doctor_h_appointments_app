@@ -32,7 +32,7 @@ class CustomObscurableFormField extends StatefulWidget {
       required this.validator,
       this.showLabel = false,
       this.isAlwaysObsucured = false,
-      this.isEnabled = false,
+      this.isEnabled = true,
       this.intialValue});
 
   @override

@@ -223,10 +223,10 @@ class UserBusinessImplementation implements UserBusinessInterface {
       // removeing the data in the secured storage so no longer the user
       // can get in the app automaticly
       // without the email and password
+      await _userDataLayer.deleteAllUserPreferences();
 
-      await saveUserPreferences(
-          userPreferencesToSave:
-              userPreferences!.copyWith(email: null, password: null));
+      /// sitting [_userPreferences] to null ,, so no..
+      _userPreferences = null;
 
       return right(null);
     } on Exception catch (error) {

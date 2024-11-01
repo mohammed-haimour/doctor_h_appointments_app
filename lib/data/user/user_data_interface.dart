@@ -18,6 +18,8 @@ abstract class UserDataInterface {
   Future<void> saveUserPreferences(
       {required UserPreferencesModel userPreferencesToSave});
 
+  Future<void> deleteAllUserPreferences();
+
   Future<GetUserInformationsResponseModel> getUserInformations();
 
   Future<UpdateUserInformationsResponseModel> updateUserInformations(

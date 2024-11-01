@@ -107,4 +107,9 @@ class UserDataImplementation implements UserDataInterface {
         LogoutResponseModel.fromJson(response);
     return logoutResponseModel;
   }
+
+  @override
+  Future<void> deleteAllUserPreferences() async {
+    await _localSource.deleteAllUserPreferences();
+  }
 }

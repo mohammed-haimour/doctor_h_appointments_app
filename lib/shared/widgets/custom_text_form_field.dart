@@ -33,7 +33,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.validator,
     this.showLabel = false,
     this.intialValue,
-    this.isEnabled = false,
+    this.isEnabled = true,
   });
 
   @override
