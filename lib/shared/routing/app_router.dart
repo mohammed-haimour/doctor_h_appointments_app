@@ -44,12 +44,7 @@ abstract class AppRouter {
         );
       case Routes.homeScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) =>
-                GetAllDoctorsCubit(getIt<DoctorsBusinessInterface>())
-                  ..getAllDoctors(),
-            child: const HomeScreen(),
-          ),
+          builder: (_) => const HomeScreen(),
         );
 
       case Routes.doctorsScreen:
@@ -64,7 +59,12 @@ abstract class AppRouter {
 
       case Routes.mainBottomNavBar:
         return MaterialPageRoute(
-          builder: (_) => const MainBottomNavBar(),
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                GetAllDoctorsCubit(getIt<DoctorsBusinessInterface>())
+                  ..getAllDoctors(),
+            child: const MainBottomNavBar(),
+          ),
         );
 
       case Routes.specializations:

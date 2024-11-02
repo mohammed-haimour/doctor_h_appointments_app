@@ -1,13 +1,50 @@
 import 'dart:math';
-import 'package:doctor_h_appointments_app/business/user/user_business_interface.dart';
-import 'package:doctor_h_appointments_app/shared/di/dependency_injection.dart';
-import 'package:intl/intl.dart';
 
+import 'package:doctor_h_appointments_app/business/user/user_business_interface.dart';
 import 'package:doctor_h_appointments_app/data/doctors/models/get_all_doctors/get_all_doctors_response_model.dart';
+import 'package:doctor_h_appointments_app/shared/di/dependency_injection.dart';
 import 'package:doctor_h_appointments_app/shared/variables/constants.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_button.dart';
+import 'package:doctor_h_appointments_app/shared/widgets/custom_error_widget.dart';
 import 'package:doctor_h_appointments_app/shared/widgets/custom_space.dart';
+import 'package:doctor_h_appointments_app/state_management/doctors/get_all_doctors/get_all_doctors_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:shimmer/shimmer.dart';
+
+class DoctorsBlocBuilder extends StatelessWidget {
+  const DoctorsBlocBuilder({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<GetAllDoctorsCubit, GetAllDoctorsState>(
+      builder: (context, state) {
+        if (state is GetAllDoctorsSuccess) {
+          return DoctorsCardsListViewBuilder(
+              doctors: state.getAllDoctorsReponseModel.data);
+        } else if (state is GetAllDoctorsFailure) {
+          return CustomErrorWidget(errorMessage: state.message);
+        } else if (state is GetAllDoctorsLoading) {
+          return Shimmer.fromColors(
+            baseColor: Colors.grey[300]!,
+            highlightColor: Colors.grey[100]!,
+            child: Container(
+              padding: Constants.paddingBiggerThanMedium,
+              height: 200,
+              decoration: BoxDecoration(
+                borderRadius: Constants.radiusLarge,
+                color: Constants.colorDoctorHRed,
+              ),
+            ),
+          );
+        } else {
+          return const Text("hello ");
+        }
+      },
+    );
+  }
+}
 
 class DoctorsCardsListViewBuilder extends StatelessWidget {
   final List<Doctor> doctors;
@@ -18,7 +55,7 @@ class DoctorsCardsListViewBuilder extends StatelessWidget {
     return Padding(
       padding: Constants.paddingMedium,
       child: ListView.separated(
-        itemCount: 4,
+        itemCount: doctors.length,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         separatorBuilder: (context, index) {
